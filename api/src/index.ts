@@ -6,8 +6,6 @@ import express, { Express } from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 
-
-
 // Importing custom middlewares and utilities
 import authenticate from './middlewares/authenticate';
 import errorHandler from './middlewares/errorHandler';
@@ -16,8 +14,8 @@ import { NotFound } from './utilities/errors';
 import env from './utilities/envs';
 
 // Importing routes
-import authRoute from './routes/auth';
-import userRoute from './routes/user';
+import authRoute from './api/auth/auth.route';
+import userRoute from './api/user/user.route';
 
 // Extracting environment variables
 const { PORT, MONGO_URI, CORS_ORIGIN } = env;

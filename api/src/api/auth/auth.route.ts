@@ -1,8 +1,8 @@
-import { onlyAdmin } from '../middlewares/authorize';
-import { register, login, logout } from '../controllers/authController';
+import { onlyAdmin } from '../../middlewares/authorize';
+import { register, login, logout } from './auth.controller';
 import { Router } from 'express';
-import asyncHandler from '../middlewares/asyncHandler';
-import authenticate from '../middlewares/authenticate';
+import asyncHandler from '../../middlewares/asyncHandler';
+import authenticate from '../../middlewares/authenticate';
 
 const router: Router = Router();
 

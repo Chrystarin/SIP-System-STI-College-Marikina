@@ -1,11 +1,20 @@
-import { RequestHandler } from "express";
+import { Request, RequestHandler } from 'express';
+import { StudentQuery } from './student.types';
+import StudentModel, { Student } from './student.model';
 
-const getStudents: RequestHandler = async (req, res) => {
-    
-}
+export const getStudents: RequestHandler = async (req, res) => {
+    const { studentId } = <Student>(<unknown>req.query);
 
-const addStudent: RequestHandler = async (req, res) => {
-    
-}
+    const modelQuery: StudentQuery = {}
+    if(studentId) modelQuery.studentId = studentId;
 
-export { getStudents, addStudent };
+    const students: Array<Student> | null = await StudentModel.find(modelQuery).exec();
+
+    res.json(students);
+};
+
+export const addStudent: RequestHandler = async (req: Request<{}, {}, Student>, res) => {
+    await StudentModel.create(req.body);
+
+    res.json({ message: 'Student added successfully' });
+};

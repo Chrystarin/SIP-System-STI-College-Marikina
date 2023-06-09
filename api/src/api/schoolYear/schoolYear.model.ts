@@ -4,10 +4,16 @@ import { UserDocument } from '../user/user.model';
 const schoolYearSchema = new Schema(
     {
         start: {
-            type: Date,
+            type: Number,
+            unique: true,
             required: [true, 'Start date is required'],
+            set: (value: Date) => value.getFullYear(),
         },
-        end: Date,
+        end: {
+            type: Number,
+            index: { unique: true, sparse: true },
+            set: (value: Date) => value.getFullYear(),
+        },
         admin: {
             type: Types.ObjectId,
             ref: 'User',

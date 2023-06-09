@@ -15,6 +15,9 @@ import env from './utilities/envs';
 
 // Importing routes
 import authRoute from './api/auth/auth.route';
+import schoolYearRoute  from './api/schoolYear/schoolYear.route';
+import sipRoute from './api/sip/sip.route';
+import studentRoute from './api/student/student.route';
 import userRoute from './api/user/user.route';
 
 // Extracting environment variables
@@ -32,6 +35,9 @@ app.use(helmet());
 // Setting up routes
 app.use('/auth', authRoute);
 app.use(authenticate);
+app.use('/schoolyear', schoolYearRoute);
+app.use('/sip', sipRoute);
+app.use('/student', studentRoute);
 app.use('/user', userRoute);
 
 // Catch-all route for handling 404 errors
@@ -45,6 +51,6 @@ mongoose
 	.connect(MONGO_URI) // Connects to MongoDB using the URI from the environment variables
 	.then(() => {
 		console.log('Connected to MongoDB');
-		app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // Starts the server on the specified port
+		app.listen(PORT, () => console.log('Server running on port', PORT)); // Starts the server on the specified port
 	})
 	.catch(console.error); // Logs any connection errors to the console

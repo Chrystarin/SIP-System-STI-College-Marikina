@@ -1,4 +1,4 @@
-import { Requestor } from '../ts/types';
+import { Requestor } from '../api/auth/auth.types';
 import { sign } from 'jsonwebtoken';
 import env from './envs';
 

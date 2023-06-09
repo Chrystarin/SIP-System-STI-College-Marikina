@@ -2,13 +2,13 @@ import { RequestHandler } from 'express';
 import { Unauthorized } from '../utilities/errors';
 import { UserRoles } from '../api/user/user.model';
 
-const onlyAdmin: RequestHandler = (req, _res, next) => {
+export const onlyAdmin: RequestHandler = (req, _res, next) => {
     if (req.user?.role === UserRoles.Admin) return next();
 
     next(new Unauthorized('This action requires admin privileges'));
 };
 
-const onlyModerator: RequestHandler = (req, _res, next) => {
+export const onlyModerator: RequestHandler = (req, _res, next) => {
     switch (req.user?.role) {
         case UserRoles.Admin:
         case UserRoles.Moderator:
@@ -17,5 +17,3 @@ const onlyModerator: RequestHandler = (req, _res, next) => {
 
     next(new Unauthorized(`This action requires moderator privileges`));
 };
-
-export { onlyAdmin, onlyModerator };

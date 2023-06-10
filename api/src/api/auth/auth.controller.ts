@@ -1,15 +1,27 @@
 import { compareSync } from 'bcrypt';
-import { Requestor } from './auth.types';
+import { RegisterUser, Requestor } from './auth.types';
 import { RequestHandler, Request } from 'express';
-import { signAccess, signRefresh, cookieOptions, } from '../../utilities/cookies'; // prettier-ignore
+import { signAccess, signRefresh, cookieOptions, } from '../../utilities/cookies';
 import { Unauthorized } from '../../utilities/errors';
-import UserModel, { User, UserDocument } from '../user/user.model';
+import UserModel, { User, UserDocument, UserStatus } from '../user/user.model';
+import { genPassword } from '../../utilities/generateId';
 
-/* prettier-ignore */
-export const register: RequestHandler = async (req: Request<{}, {}, User>, res) => {
-    await UserModel.create({ ...req.body, status: 'active' });
+export const register: RequestHandler = async (req: Request<{}, {}, RegisterUser>, res) => {
+    const { employeeId, role, name, email } = req.body;
+    const userData = {
+        employeeId,
+        role,
+        name,
+        credentials: {
+            email,
+            password: genPassword()
+        },
+        status: UserStatus.Active
+    }
 
-    res.json({ message: 'Registered successfully' });
+    await UserModel.create(userData);
+
+    res.json({ user: userData, message: 'Registered successfully' });
 };
 
 /* prettier-ignore */
@@ -35,7 +47,5 @@ export const login: RequestHandler = async (req: Request<{}, {}, User['credentia
 };
 
 export const logout: RequestHandler = (_req, res) => {
-    res.cookie('access-token', '', cookieOptions.default)
-        .cookie('refresh-token', '', cookieOptions.default)
-        .json('Logged out successfully');
+    res.cookie('access-token', '', cookieOptions.default).cookie('refresh-token', '', cookieOptions.default).json('Logged out successfully');
 };

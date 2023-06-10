@@ -8,6 +8,8 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 		message = 'Something went wrong',
 		statusCode = 500
 	} = err;
+    
+	console.log("🚀 ~ file: errorHandler.ts:11 ~ err:", err)
 
 	if (err.code && err.code === 11000) {
 		const [property, value] = <Array<string>>(

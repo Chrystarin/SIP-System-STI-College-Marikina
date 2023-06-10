@@ -9,15 +9,13 @@ const duration = {
 
 type TCookieOption = {
 	httpOnly: boolean;
-	sameSite: 'strict';
-	secure: boolean;
+	sameSite: 'none';
 	maxAge: number;
 };
 
 const options: TCookieOption = {
 	httpOnly: true,
-	sameSite: 'strict',
-	secure: true,
+	sameSite: 'none',
 	maxAge: 0
 };
 

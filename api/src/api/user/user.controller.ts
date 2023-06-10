@@ -1,18 +1,23 @@
 import { NotFound, Unauthorized } from '../../utilities/errors';
 import { RequestHandler, Request } from 'express';
-import { Reset } from './user.types';
+import { Reset, UserQuery } from './user.types';
 import UserModel, { User, UserDocument } from './user.model';
+import { genPassword } from '../../utilities/generateId';
 
 export const getUsers: RequestHandler = async (req, res) => {
-    const { employeeId, role } = <User>(<unknown>req.query);
+    const { employeeId, role } = <UserQuery>(<unknown>req.query);
 
-    const users: Array<UserDocument> | null = await UserModel.find({ employeeId, role }, { credentials: 0 }).exec();
+    const modelQuery: UserQuery = {};
+    if(employeeId) modelQuery.employeeId = employeeId;
+    if(role) modelQuery.role = role;
+
+    const users: Array<UserDocument> | null = await UserModel.find(modelQuery, { credentials: 0 }).exec();
 
     res.json(users);
 };
 
 export const resetPassword: RequestHandler = async (req: Request<{}, {}, Reset>, res) => {
-    const { employeeId, password } = req.body;
+    const { employeeId, password = genPassword() } = req.body;
 
     const { modifiedCount } = await UserModel.updateOne(
         { employeeId },
@@ -25,7 +30,7 @@ export const resetPassword: RequestHandler = async (req: Request<{}, {}, Reset>,
 
     if (modifiedCount === 0) throw new NotFound('User not found');
 
-    res.json({ message: 'Password reset successfully' });
+    res.json({ password, message: 'Password reset successfully' });
 };
 
 export const updatePassword: RequestHandler = async (req: Request<{}, {}, User['credentials']>, res) => {

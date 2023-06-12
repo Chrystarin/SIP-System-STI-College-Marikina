@@ -1,4 +1,4 @@
-import { SchoolYearDocument } from '../schoolYear/schoolYear.model';
+import { SchoolYear, SchoolYearDocument } from '../schoolYear/schoolYear.model';
 import { SIPDocument } from './sip.model';
 import { Student, StudentDocument } from '../student/student.model';
 
@@ -48,8 +48,8 @@ export type SIPQuery = {
     sipId?: SIPDocument['sipId'];
     studentId?: StudentDocument['studentId'];
     status?: SIPDocument['status'];
-    schoolYearStart?: Date;
-    schoolYearEnd?: Date;
+    schoolYearStart?: string;
+    schoolYearEnd?: string;
 };
 
 export type SIPModelQuery = {

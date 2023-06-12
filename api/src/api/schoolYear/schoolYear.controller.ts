@@ -6,6 +6,7 @@ import SchoolYearModel, { SchoolYearPopulatedDocument } from './schoolYear.model
 
 export const getSchoolYears: RequestHandler = async (req, res) => {
     const { schoolYearStart, schoolYearEnd } = <SchoolYearQuery>(<unknown>req.query);
+    console.log(schoolYearStart)
 
     let modelQuery: SchoolYearModelQuery = {};
 
@@ -14,6 +15,7 @@ export const getSchoolYears: RequestHandler = async (req, res) => {
         modelQuery.end = { $lte: schoolYearEnd.getFullYear() };
     } else {
         const schoolYear: [Date | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
+        console.log(schoolYear)
         if (schoolYear[0] === undefined) throw new UnprocessableEntity('School Year not started yet');
 
         const [year, prop] = schoolYear;

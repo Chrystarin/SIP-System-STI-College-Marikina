@@ -11,12 +11,14 @@ type TCookieOption = {
 	httpOnly: boolean;
 	sameSite: 'none';
 	maxAge: number;
+    secure: boolean;
 };
 
 const options: TCookieOption = {
 	httpOnly: true,
 	sameSite: 'none',
-	maxAge: 0
+	maxAge: 0,
+    secure: true
 };
 
 const cookieOptions: {

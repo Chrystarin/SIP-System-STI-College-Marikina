@@ -1,0 +1,10 @@
+.Container{
+    width: 100%;
+    max-width: var(--maxWidth);
+    margin: auto;
+    header{
+        background: url('../../Images/Resources/WebsiteResources/LandingPageBackground.png') no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+}

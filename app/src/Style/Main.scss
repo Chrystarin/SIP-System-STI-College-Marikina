@@ -1,0 +1,117 @@
+:root {
+    // Color to set up "var(--accent)"
+    --primary: #2E86DF;
+    --maxWidth: 1900px ; 
+    --Shadow: 0 0 20px rgba(0, 0, 0, 0.229);    
+    font-size: 15px;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+h1,h2,h3,h4,h5,h6,p,a,span{
+    font-family: sans-serif;
+    color: black;
+    text-decoration: none;
+}
+h1{
+    font-size: 3.73rem;
+}
+h2{
+    font-size: 3rem;
+}
+h3{
+    font-size: 2.3rem;
+}
+h4{
+    font-size: 1.8rem;
+}
+h5{
+    font-size: 1.4rem;
+}
+h6{
+    font-size: 1.07rem;
+}
+p{
+    font-size: 1nrem;
+}
+.BodyText1{
+    font-size: 1.8rem;
+}
+.BodyText2{
+    font-size: 1.6rem;
+}
+.BodyText3{
+    font-size: 1;
+}
+
+// html:not([data-scroll='0']) {
+//     .Navigation{
+//         background-color: var(--primary);
+//         box-shadow: var(--Shadow);
+//     }
+// }
+.Navigation{
+    width: 100vw;
+    position: fixed;
+    top:0;
+    // box-shadow: var(--Shadow);
+    .MainContainer{
+        height: 70px;
+        width: 100%;
+        margin: auto;
+        max-width: var(--maxWidth);
+        display: flex;
+        align-items: center;
+        padding: 0 1.5em ;
+        
+        .LogoContainer{
+            flex-grow: 1;
+            height: 60%;
+            .Logo{
+                height: 100%;
+            }
+        }
+        .NavButtons{
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+            li{
+                a{
+                    color: black;
+                }
+            }
+        }
+
+        
+    }
+}
+
+.Layout{
+    display: flex;
+    .SideNavigation{
+        background-color: red($color: #000000);
+        box-shadow: var(--Shadow);
+        height: 100vh;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        #Logo{
+            margin: 25px 0;
+            width: 80%;
+        }
+        .NavigationButtons{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            li{
+            background-color: red;
+
+            }
+        }
+    }
+}

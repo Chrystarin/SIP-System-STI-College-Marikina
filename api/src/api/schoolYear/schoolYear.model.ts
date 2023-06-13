@@ -7,12 +7,10 @@ const schoolYearSchema = new Schema(
             type: Number,
             unique: true,
             required: [true, 'Start date is required'],
-            set: (value: Date) => value.getFullYear(),
         },
         end: {
             type: Number,
             index: { unique: true, sparse: true },
-            set: (value: Date) => value.getFullYear(),
         },
         admin: {
             type: Types.ObjectId,
@@ -24,8 +22,8 @@ const schoolYearSchema = new Schema(
 );
 
 export interface SchoolYear {
-    start: Date;
-    end: Date;
+    start: number;
+    end: number;
     admin: Types.ObjectId | Record<string, unknown>;
 }
 

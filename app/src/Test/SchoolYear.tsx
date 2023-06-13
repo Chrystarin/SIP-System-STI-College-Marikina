@@ -25,6 +25,21 @@ const SchoolYear: React.FC<SchoolYearProps> = (props) => {
         }
     };
 
+    const endSchoolYear = async () => {
+        try{
+            await axios
+            .patch(`/schoolyears`)
+            .then((response: any) => {
+                console.log(response);
+                alert(response.data.message);
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.message);
+        }
+    };
+
     const fetchSchoolYears = async () => {
         try{
             await axios
@@ -49,6 +64,10 @@ const SchoolYear: React.FC<SchoolYearProps> = (props) => {
             <div>
                 <h1>Start School Year</h1>
                 <button onClick={() => startSchoolYear()}>Start School Year</button>
+            </div>
+            <div>
+                <h1>End School Year</h1>
+                <button onClick={() => endSchoolYear()}>End School Year</button>
             </div>
             <div>
                 <h1>School Years</h1>

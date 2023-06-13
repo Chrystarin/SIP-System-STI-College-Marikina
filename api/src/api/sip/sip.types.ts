@@ -1,4 +1,4 @@
-import { SchoolYear, SchoolYearDocument } from '../schoolYear/schoolYear.model';
+import { SchoolYearDocument } from '../schoolYear/schoolYear.model';
 import { SIPDocument } from './sip.model';
 import { Student, StudentDocument } from '../student/student.model';
 

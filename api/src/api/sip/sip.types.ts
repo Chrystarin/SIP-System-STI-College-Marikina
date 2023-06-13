@@ -48,8 +48,8 @@ export type SIPQuery = {
     sipId?: SIPDocument['sipId'];
     studentId?: StudentDocument['studentId'];
     status?: SIPDocument['status'];
-    schoolYearStart?: Date;
-    schoolYearEnd?: Date;
+    schoolYearStart?: string;
+    schoolYearEnd?: string;
 };
 
 export type SIPModelQuery = {

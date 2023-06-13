@@ -1,10 +1,10 @@
 import { compareSync } from 'bcrypt';
+import { genPassword } from '../../utilities/generateId';
 import { RegisterUser, Requestor } from './auth.types';
 import { RequestHandler, Request } from 'express';
 import { signAccess, signRefresh, cookieOptions, } from '../../utilities/cookies';
 import { Unauthorized } from '../../utilities/errors';
 import UserModel, { User, UserDocument, UserStatus } from '../user/user.model';
-import { genPassword } from '../../utilities/generateId';
 
 export const register: RequestHandler = async (req: Request<{}, {}, RegisterUser>, res) => {
     const { employeeId, role, name, email } = req.body;

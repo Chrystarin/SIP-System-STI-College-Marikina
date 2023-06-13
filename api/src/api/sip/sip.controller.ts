@@ -7,6 +7,23 @@ import SchoolYearModel, { SchoolYearDocument } from '../schoolYear/schoolYear.mo
 import SipModel, { IssuerDocument, SIP, SIPDocument, SIPPopulatedDocument } from './sip.model';
 import StudentModel, { StudentDocument } from '../student/student.model';
 
+const getCaseKey = (caseType: CaseTypes): CaseKeys => {
+    switch (caseType) {
+        case CaseTypes.ETA:
+            return CaseKeys[CaseTypes.ETA];
+        case CaseTypes.DCP:
+            return CaseKeys[CaseTypes.DCP];
+        case CaseTypes.UoaS:
+            return CaseKeys[CaseTypes.UoaS];
+        case CaseTypes.AEC:
+            return CaseKeys[CaseTypes.AEC];
+        case CaseTypes.LD:
+            return CaseKeys[CaseTypes.LD];
+        default:
+            throw new UnprocessableEntity('Invalid case type');
+    }
+};
+
 export const getSIPs: RequestHandler = async (req, res) => {
     const { sipId, studentId, status, schoolYearStart, schoolYearEnd } = <SIPQuery>(<unknown>req.query);
 
@@ -24,8 +41,8 @@ export const getSIPs: RequestHandler = async (req, res) => {
     }
 
     if (schoolYearStart && schoolYearEnd) {
-        const start = schoolYearStart.getFullYear();
-        const end = schoolYearEnd.getFullYear();
+        const start = new Date(schoolYearStart).getFullYear();
+        const end = new Date(schoolYearEnd).getFullYear();
 
         if (start >= end) throw new UnprocessableEntity('School Year range invalid');
 
@@ -33,12 +50,12 @@ export const getSIPs: RequestHandler = async (req, res) => {
 
         modelQuery.schoolYear = { $in: schoolYears.map((schoolYear) => schoolYear._id) };
     } else {
-        const schoolYear: [Date | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
+        const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
         if (schoolYear[0] === undefined) throw new UnprocessableEntity('School Year not started yet');
 
         const [year, prop] = schoolYear;
 
-        const SY: SchoolYearDocument | null = await SchoolYearModel.findOne({ [prop]: year }, { _id: 1 }).exec();
+        const SY: SchoolYearDocument | null = await SchoolYearModel.findOne({ [prop]: new Date(year).getFullYear() }, { _id: 1 }).exec();
         if (SY === null) throw new UnprocessableEntity("School Year doesn't saved yet");
 
         modelQuery.schoolYear = SY._id;
@@ -58,23 +75,6 @@ export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, re
     if (modifiedCount === 0) throw new NotFound('SIP not existing');
 
     res.json({ message: 'SIP status updated' });
-};
-
-const getCaseKey = (caseType: CaseTypes): CaseKeys => {
-    switch (caseType) {
-        case CaseTypes.ETA:
-            return CaseKeys[CaseTypes.ETA];
-        case CaseTypes.DCP:
-            return CaseKeys[CaseTypes.DCP];
-        case CaseTypes.UoaS:
-            return CaseKeys[CaseTypes.UoaS];
-        case CaseTypes.AEC:
-            return CaseKeys[CaseTypes.AEC];
-        case CaseTypes.LD:
-            return CaseKeys[CaseTypes.LD];
-        default:
-            throw new UnprocessableEntity('Invalid case type');
-    }
 };
 
 export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res) => {

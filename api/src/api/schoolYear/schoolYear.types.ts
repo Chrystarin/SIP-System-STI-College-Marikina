@@ -1,8 +1,8 @@
 import { SchoolYear } from "./schoolYear.model";
 
 export type SchoolYearQuery = {
-    schoolYearStart?: Date;
-    schoolYearEnd?: Date;
+    schoolYearStart?: string;
+    schoolYearEnd?: string;
 }
 
 export type SchoolYearModelQuery = {

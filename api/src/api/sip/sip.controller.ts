@@ -78,7 +78,9 @@ export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, re
 };
 
 export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res) => {
-    const { studentId, sipCase, quarter } = req.body;
+    const { studentId, sipCase, term } = req.body;
+
+    console.log(req.body)
 
     if (req.user === undefined) throw new Unauthorized('Login first');
     const user: UserDocument = req.user;
@@ -103,7 +105,7 @@ export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res
 
     matchedCase.push({
         issuer: user._id,
-        quarter,
+        term,
         issuedAt: new Date()
     });
 

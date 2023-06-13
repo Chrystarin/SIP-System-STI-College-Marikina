@@ -2,7 +2,7 @@ import { Document, Schema, Types, model } from 'mongoose';
 import { SchoolYearDocument, SchoolYearPopulatedDocument } from '../schoolYear/schoolYear.model';
 import { UserDocument } from '../user/user.model';
 import { StudentDocument } from '../student/student.model';
-import { CaseKeys, Quarters, SIPStatus } from './sip.types';
+import { CaseKeys, Terms, SIPStatus } from './sip.types';
 
 const issuerSchema = new Schema({
     issuer: {
@@ -10,9 +10,9 @@ const issuerSchema = new Schema({
         ref: 'User',
         required: [true, 'Issuer is required']
     },
-    quarter: {
+    term: {
         type: String,
-        required: [true, 'Quarter is required'],
+        required: [true, 'Term is required'],
         enum: {
             values: [
                 'Senior High School - Quarter 1',
@@ -29,7 +29,7 @@ const issuerSchema = new Schema({
                 'Tertiary - Semester 2 - Finals',
                 'Tertiary - Summer'
             ],
-            message: '{VALUE} is not supported quarter'
+            message: '{VALUE} is not supported term'
         }
     },
     issuedAt: {
@@ -90,7 +90,7 @@ const sipSchema = new Schema(
 
 interface Issuer {
     issuer: Types.ObjectId | Record<string, unknown>;
-    quarter: Quarters;
+    term: Terms;
     issuedAt: Date;
 }
 

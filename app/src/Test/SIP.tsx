@@ -9,16 +9,16 @@ const SIP: React.FC<SIPProps> = (props) => {
     const [form, setForm] = useState({
         studentId: '',
         sipCase: '',
-        quarter: ''
+        term: ''
     })
 
     const addCase = async () => {
         try{
             await axios
             .post(`/sips`, {
-                studentId: '',
-                sipCase: '',
-                quarter: ''
+                studentId: form.studentId,
+                sipCase: form.sipCase,
+                term: form.term
             })
             .then((response: any) => {
                 console.log(response);
@@ -36,7 +36,7 @@ const SIP: React.FC<SIPProps> = (props) => {
             <h1>Add SIP</h1>
             Student ID: <input type="text" onChange={(e)=>setForm({...form, studentId: e.target.value})}/>
             Case: <input type="text" onChange={(e)=>setForm({...form, sipCase: e.target.value})} />
-            Quarter: <input type="text" onChange={(e)=>setForm({...form, quarter: e.target.value})} />
+            Term: <input type="text" onChange={(e)=>setForm({...form, term: e.target.value})} />
             <button onClick={()=>addCase()}>Add Case</button>
         </div>
     );

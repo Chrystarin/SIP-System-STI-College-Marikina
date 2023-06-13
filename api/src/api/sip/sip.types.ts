@@ -20,7 +20,7 @@ export enum CaseTypes {
     LD = 'Learning Difficulty',
 }
 
-export enum Quarters {
+export enum Terms {
     SHSQ1 = 'Senior High School - Quarter 1',
     SHSQ2 = 'Senior High School - Quarter 2',
     SHSQ3 = 'Senior High School - Quarter 3',
@@ -62,5 +62,5 @@ export type SIPModelQuery = {
 export type AddCase = {
     studentId: Student['studentId'];
     sipCase: CaseTypes;
-    quarter: Quarters;
+    term: Terms;
 };

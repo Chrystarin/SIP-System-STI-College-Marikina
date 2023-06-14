@@ -71,18 +71,11 @@ const sipSchema = new Schema(
             }
         },
         closed: {
-            type: {
-                at: {
-                    type: Date,
-                    required: [true, 'Closed at is required']
-                },
-                by: {
-                    type: Types.ObjectId,
-                    ref: 'User',
-                    required: [true, 'Closed by is required']
-                }
-            },
-            default: () => ({})
+            at: Date,
+            by: {
+                type: Types.ObjectId,
+                ref: 'User'
+            }
         }
     },
     { timestamps: true }

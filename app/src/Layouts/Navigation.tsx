@@ -12,7 +12,7 @@ function Navigation() {
                 </div>
                 <ul className='NavButtons'>
                     <li><a href=""><p className='BodyText2'>About</p></a></li>
-                    <li><Button variant='contained'>Login</Button></li>
+                    <li><a href="/test/auth"><Button variant='contained'>Login</Button></a></li>
                 </ul>
             </div>
         </nav>

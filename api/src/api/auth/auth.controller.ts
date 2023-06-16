@@ -37,7 +37,7 @@ export const login: RequestHandler = async (req: Request<{}, {}, User['credentia
 
     const user: UserDocument | null = await UserModel.findOne(
         { 'credentials.email': email },
-        { 'credentials.password': 1, employeeId: 1, role: 1 }
+        { 'credentials.password': 1, employeeId: 1, role: 1, name: 1 }
     ).exec();
 
     if (!user || !compareSync(password, user.credentials.password))

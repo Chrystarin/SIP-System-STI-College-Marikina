@@ -8,6 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useAuth } from './../Utils/AuthContext';
 interface LayoutProps {
     // define your props here
     active :string
@@ -21,6 +22,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const { logout } = useAuth();
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : '';
     return (
         <div className='Layout'>
             <SideNavigation Active={props.active}/>
@@ -47,8 +50,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
                         >
                             <div className='ProfileDropdown'>
                                 <div className='ProfileDropdown__Info'>
-                                    <h6>Dianne Chrystalin Brandez</h6>
-                                    <p>Teacher</p>
+                                    <h6>{user.name.first} {user.name.last}</h6>
+                                    <p>{(user.role).toUpperCase()}</p>
                                 </div>
                                 <ul className='ProfileDropdown__Navigation'>
                                     <a href="/profile">
@@ -58,7 +61,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
                                         </li>
                                     </a>
                                     
-                                    <li>
+                                    <li onClick={()=>logout()}>
                                         <LogoutIcon/>
                                         <p>Logout</p>
                                     </li>

@@ -10,17 +10,21 @@ type  SideNavigationProps ={
     Active : string
 }
 const SideNavigation = (props:SideNavigationProps)=> {
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : '';
     return <>
         <div className='SideNavigation'>
             <div className='Sticky'>
             <img  id='Logo' src={Logo} alt="" />
             <ul className='NavigationButtons'>
-                <li>
-                    <a href="/employees" className={props.Active==="Employees"?"active":""}>
-                        <PeopleAltIcon/>  
-                        <p>Employees</p>
-                    </a>
-                </li>
+                { user.role === 'teacher' ? '' :
+                    <li>
+                        <a href="/employees" className={props.Active==="Employees"?"active":""}>
+                            <PeopleAltIcon/>  
+                            <p>Employees</p>
+                        </a>
+                    </li>
+                }
+                
                 <li>
                     <a href="/cases" className={props.Active==="Cases"?"active":""}>
                         <WorkIcon/>  

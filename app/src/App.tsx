@@ -23,27 +23,40 @@ const App: React.FC = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/test/auth" element={<TestAuth/>} />
 
-      <Route element={<Layout active={""}/>} >
-        <Route path="/profile" element={<Profile />} />
-      </Route>
+        <Route element={<ProtectedRoute allowedRoles={['admin', 'teacher', 'moderator']}/>}>
+            <Route element={<Layout active={""}/>} >  
+                <Route path="/profile" element={<Profile />} />
+                
+                <Route path="/test/student" element={<TestStudent/>} />
+                <Route path="/test/schoolyear" element={<TestSchoolYear/>} />
+                <Route path="/test/sip" element={<TestSIP/>} />
+                <Route path="/test/profile" element={<TestProfile/>} />
+            </Route>
 
-      <Route element={<Layout active={"Employees"}/>} >
-        <Route path="/employees" element={<EmployeesList/>} />
-        <Route path="/employees/add" element={<AddEmployee/>} />
-      </Route>
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'moderator']}/>}>
+                <Route element={<Layout active={"Employees"}/>} >
+                    <Route path="/employees" element={<EmployeesList/>} />
+                    <Route path="/employees/:id" element={<Profile />} />
+                    <Route element={<ProtectedRoute allowedRoles={['admin']}/>}>
+                        <Route path="/employees/add" element={<AddEmployee/>} />
+                    </Route>
+                </Route>
+            </Route>
+            
+            <Route element={<Layout active={"Cases"}/>} >
+                <Route path="/cases" element={<CasesList/>} />
+                <Route path="/case/add" element={<AddCase/>} />
+            </Route>
 
-      <Route element={<Layout active={"Cases"}/>} >
-        <Route path="/cases" element={<CasesList/>} />
-        <Route path="/case/add" element={<AddCase/>} />
-      </Route>
+            <Route element={<Layout active={"Students"}/>} >
+                <Route path="/students" element={<StudentList/>} />
+                <Route path="/students/:id" element={<StudentView/>} />
+            </Route>
+        </Route>
       
-      <Route element={<Layout active={"Students"}/>} >
-        <Route path="/students" element={<StudentList/>} />
-        <Route path="/students/view" element={<StudentView/>} />
-      </Route>
-
     </Routes>
   );
 };

@@ -28,7 +28,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             .then((response: any) => {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user))
-                navigate("/test/profile")
+                navigate("/profile")
             });
         }
         catch (error: any){

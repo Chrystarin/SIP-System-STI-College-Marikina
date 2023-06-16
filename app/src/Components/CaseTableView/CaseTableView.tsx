@@ -10,14 +10,11 @@ import Paper from '@mui/material/Paper';
 import { Avatar } from '@mui/material';
 import { useNavigate} from 'react-router-dom';
     
-function CaseTableView() {
+function CaseTableView(props:any) {
     const navigate = useNavigate();
-    const tableData = [
-        {id:"0904232", name:"Harold James H. Castillo",section:"CS801P", cases:"45",sip :"5"},
-        {id:"0904232", name:"Dianne Chrystalin B. Castillo",section:"CS801P", cases:"45",sip :"5"},
-        {id:"0904232", name:"Jon Angelo Llagas",section:"CS801P", cases:"45",sip :"5"},
-        {id:"0904232", name:"Gian Carlo Dela Cruz",section:"CS801P", cases:"45",sip :"5"}
-    ]
+
+    const {data} = props;
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table" className='CaseTableView'>
@@ -25,27 +22,27 @@ function CaseTableView() {
                     <TableRow>
                         <TableCell><h6>Name</h6></TableCell>
                         <TableCell align="right"><h6>ID</h6></TableCell>
-                        <TableCell align="right"><h6>Program & Section</h6></TableCell>
+                        <TableCell align="right"><h6>Registered Since</h6></TableCell>
                         <TableCell align="right"><h6>Active Cases</h6></TableCell>
                         <TableCell align="right"><h6>Total SIP</h6></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tableData.map((row) => (
+                    {data.map((row:any) => (
                         <TableRow
-                        key={row.id}
+                        key={row.studentId}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         className='CaseTableView__row'
                         
                         >
-                            <TableCell onClick={()=>navigate('/students/view')} component="th" scope="row" >
+                            <TableCell onClick={()=>navigate(`/students/${row.studentId}`)} component="th" scope="row" >
                                 <div className='NameHolder'>
                                     <Avatar className='NameHolder__Avatar'/>
-                                    <p>{row.name}</p>
+                                    <p>{row.name.first} {row.name.last}</p>
                                 </div>
                             </TableCell>
-                            <TableCell align="right"><p>{row.id}</p></TableCell>
-                            <TableCell align="right"><p>{row.section}</p></TableCell>
+                            <TableCell align="right"><p>{row.studentId}</p></TableCell>
+                            <TableCell align="right"><p>{row.createdAt}</p></TableCell>
                             <TableCell align="right"><p>{row.cases}</p></TableCell>
                             <TableCell align="right"><p>{row.sip}</p></TableCell>
                         </TableRow>

@@ -57,14 +57,15 @@ export const getSIPs: RequestHandler = async (req, res) => {
         modelQuery.schoolYear = { $in: schoolYears.map((schoolYear) => schoolYear._id) };
     } else {
         const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
-        if (schoolYear[0] === undefined) throw new UnprocessableEntity('School Year not started yet');
+        
+        if (schoolYear[0] !== undefined) {
+            const [year, prop] = schoolYear;
 
-        const [year, prop] = schoolYear;
+            const SY: SchoolYearDocument | null = await SchoolYearModel.findOne({ [prop]: new Date(year).getFullYear() }, { _id: 1 }).exec();
+            if (SY === null) throw new UnprocessableEntity("School Year doesn't saved yet");
 
-        const SY: SchoolYearDocument | null = await SchoolYearModel.findOne({ [prop]: new Date(year).getFullYear() }, { _id: 1 }).exec();
-        if (SY === null) throw new UnprocessableEntity("School Year doesn't saved yet");
-
-        modelQuery.schoolYear = SY._id;
+            modelQuery.schoolYear = SY._id;
+        }
     }
 
     const SIPs: Array<SIPPopulatedDocument> = await SipModel.find(modelQuery)

@@ -32,10 +32,17 @@ export const getSIPs: RequestHandler = async (req, res) => {
     if (sipId) modelQuery.sipId = sipId;
     if (status) modelQuery.status = status;
 
-    if(employeeId) {
+    if (employeeId) {
         const employee: UserDocument | null = await UserModel.findOne({ employeeId }, { _id: 1 }).exec();
-        if(employee === null) throw new NotFound('Employee not saved yet');
-        modelQuery['cases.$.issuer'] = employee._id;
+        if (employee === null) throw new NotFound('Employee not saved yet');
+
+        modelQuery.$or = [
+            { 'cases.ETA.issuer': employee._id },
+            { 'cases.DCP.issuer': employee._id },
+            { 'cases.UoaS.issuer': employee._id },
+            { 'cases.AEC.issuer': employee._id },
+            { 'cases.LD.issuer': employee._id }
+        ];
     }
 
     if (studentId) {
@@ -57,7 +64,7 @@ export const getSIPs: RequestHandler = async (req, res) => {
         modelQuery.schoolYear = { $in: schoolYears.map((schoolYear) => schoolYear._id) };
     } else {
         const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
-        
+
         if (schoolYear[0] !== undefined) {
             const [year, prop] = schoolYear;
 

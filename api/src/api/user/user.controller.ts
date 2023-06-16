@@ -1,4 +1,4 @@
-import { NotFound, Unauthorized } from '../../utilities/errors';
+import { Forbidden, NotFound, Unauthorized } from '../../utilities/errors';
 import { RequestHandler, Request } from 'express';
 import { Reset, UserQuery } from './user.types';
 import UserModel, { User, UserDocument } from './user.model';
@@ -43,3 +43,16 @@ export const updatePassword: RequestHandler = async (req: Request<{}, {}, User['
 
     res.json({ message: 'Password updated successfully' });
 };
+
+export const updateStatus: RequestHandler = async (req: Request<{}, {}, User>, res) => {
+    const { employeeId, status } = req.body;
+
+    const user: UserDocument | undefined = req.user;
+    if(user === undefined) throw new Unauthorized();
+    if(user.employeeId === employeeId) throw new Forbidden();
+
+    const { modifiedCount } = await UserModel.updateOne({ employeeId }, { $set: { status } }).exec();
+    if(modifiedCount === 0) throw new NotFound('Employee not found');
+
+    res.json({ message: 'Status updated successfully' });
+}

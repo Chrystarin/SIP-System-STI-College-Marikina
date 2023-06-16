@@ -1,5 +1,5 @@
 import { SchoolYearDocument } from '../schoolYear/schoolYear.model';
-import { SIPDocument } from './sip.model';
+import { IssuerDocument, SIPDocument } from './sip.model';
 import { Student, StudentDocument } from '../student/student.model';
 import { User, UserDocument } from '../user/user.model';
 
@@ -18,7 +18,7 @@ export enum CaseTypes {
     DCP = 'Declining Class Performance',
     UoaS = 'Unbecoming of an STIer',
     AEC = 'Assessment/Exam Concern',
-    LD = 'Learning Difficulty',
+    LD = 'Learning Difficulty'
 }
 
 export enum Terms {
@@ -59,7 +59,13 @@ export type SIPModelQuery = {
     student?: StudentDocument['_id'];
     status?: SIPDocument['status'];
     schoolYear?: { $in: Array<SchoolYearDocument['_id']> } | SchoolYearDocument['_id'];
-    'cases.$.issuer'?: UserDocument['_id'];
+    $or?: [
+        { 'cases.ETA.issuer': IssuerDocument['issuer'] },
+        { 'cases.DCP.issuer': IssuerDocument['issuer'] },
+        { 'cases.UoaS.issuer': IssuerDocument['issuer'] },
+        { 'cases.AEC.issuer': IssuerDocument['issuer'] },
+        { 'cases.LD.issuer': IssuerDocument['issuer'] }
+    ];
 };
 
 export type AddCase = {

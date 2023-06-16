@@ -1,4 +1,4 @@
-import { getUsers, resetPassword, updatePassword } from './user.controller';
+import { getUsers, resetPassword, updatePassword, updateStatus } from './user.controller';
 import { onlyAdmin } from '../../middlewares/authorize';
 import { Router } from 'express';
 import asyncHandler from '../../middlewares/asyncHandler';
@@ -7,7 +7,9 @@ const router: Router = Router();
 
 router.get('/', asyncHandler(getUsers));
 
-router.patch('/update', asyncHandler(updatePassword));
+router.patch('/updatePassword', asyncHandler(updatePassword));
+
+router.patch('/updateStatus', onlyAdmin, asyncHandler(updateStatus));
 
 router.patch('/reset', onlyAdmin, asyncHandler(resetPassword));
 

@@ -2,9 +2,139 @@
     width: 100%;
     max-width: var(--maxWidth);
     margin: auto;
+
     header{
         background: url('../../Images/Resources/WebsiteResources/LandingPageBackground.png') no-repeat;
         background-size: cover;
         height: 100vh;
     }
+
+    h4 {
+        color: var(--primary);
+        text-align: center;
+    }
+
+    .MainSection {
+        display:flex;
+        align-items: center;
+        height: 100vh;
+
+        .Text {
+            display:flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 50%;
+            margin: auto;
+            h1 {
+                color: var(--primary)
+            }
+        }
+
+        .Image{
+            display: flex;
+            margin: auto;
+
+            img {
+                width: 500px;
+            }
+        }
+    }
 }
+
+#Container_Sections {
+	width: 100%;
+	margin: auto;
+	
+	section {
+		.Container_Title_Section {
+			text-align: center;
+			padding: 1em 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			h3 {
+				margin-bottom: 15px;
+			}
+			h6 {
+				line-height: 30px;
+				width: 60%;
+			}
+		}
+	}
+}
+
+#Container_Section {
+	
+	background-color: var(--dark1);
+	position: relative;
+	color: white;
+	z-index: -1;
+	padding: 1em 2em 0;
+	
+	.Container_Content_Section{
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+		row-gap: 75px;
+		
+		.Img_Content_Section{
+			display: flex;
+			justify-content: center;
+
+			img{
+				width: 70%;
+			}
+		}
+		.Img_Content_Section:nth-child(even){
+			display: flex;
+		}
+		.Title_Content_Section{
+			display: flex;
+			align-self: center;
+			justify-content: center;
+			div{
+				width: 70%;
+				h4{
+					margin-bottom: 15px;
+				}
+				h5{
+					line-height: 1.5em;
+				}
+			}
+		}
+	}
+	
+}
+
+.DeveloperContainer {
+    margin: auto;
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+    .DeveloperCard {
+        // border: 1px solid;
+        border-radius: 20px;
+        width: 25%;
+        padding: 20px;
+        display: flex;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        
+        img {
+            width: 100px;
+            border-radius: 100%;
+        }
+    
+        .Content {
+            align-self: center;
+            padding: 10px;
+            .Position{
+                color: var(--primary);
+            }
+        }
+    }
+}
+

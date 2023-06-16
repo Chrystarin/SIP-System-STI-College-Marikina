@@ -9,7 +9,6 @@ import {
 } from '../../utilities/cookies';
 import { Unauthorized } from '../../utilities/errors';
 import UserModel, { User, UserDocument, UserStatus } from '../user/user.model';
-import { hashSync } from 'bcrypt';
 
 export const register: RequestHandler = async (
 	req: Request<{}, {}, RegisterUser>,
@@ -35,7 +34,7 @@ export const register: RequestHandler = async (
 /* prettier-ignore */
 export const login: RequestHandler = async (req: Request<{}, {}, User['credentials']>, res) => {
     const { email, password } = req.body;
-    console.log(hashSync(password, 10))
+
     const user: UserDocument | null = await UserModel.findOne(
         { 'credentials.email': email },
         { 'credentials.password': 1, employeeId: 1, role: 1 }
@@ -51,7 +50,7 @@ export const login: RequestHandler = async (req: Request<{}, {}, User['credentia
 
     res.cookie('access-token', signAccess(requestor), cookieOptions.access)
         .cookie('refresh-token', signRefresh(requestor), cookieOptions.refresh)
-        .json({ message: 'Logged in successfully' });
+        .json({ message: 'Logged in successfully', user:user });
 };
 
 export const logout: RequestHandler = (_req, res) => {

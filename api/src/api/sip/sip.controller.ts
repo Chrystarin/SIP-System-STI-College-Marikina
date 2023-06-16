@@ -71,6 +71,8 @@ export const getSIPs: RequestHandler = async (req, res) => {
 export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, res) => {
     const { sipId, status } = req.body;
 
+    console.log(req.body)
+
     const { modifiedCount } = await SipModel.updateOne({ sipId }, { $set: { status } }).exec();
     if (modifiedCount === 0) throw new NotFound('SIP not existing');
 
@@ -79,8 +81,6 @@ export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, re
 
 export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res) => {
     const { studentId, sipCase, term } = req.body;
-
-    console.log(req.body)
 
     if (req.user === undefined) throw new Unauthorized('Login first');
     const user: UserDocument = req.user;

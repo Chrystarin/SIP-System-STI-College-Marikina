@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from '../Utils/Axios';
+import { useAuth } from './../Utils/AuthContext';
 
 interface AuthProps {
     // define your props here
   }
   
-  const Auth: React.FC<AuthProps> = (props) => {
+const Auth: React.FC<AuthProps> = (props) => {
+
+    const { login, logout } = useAuth();
+
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: ''
@@ -18,25 +22,6 @@ interface AuthProps {
         lastName: '',
         email: ''
     });
-
-    const login = async () => {
-        console.log(loginForm)
-        try{
-            await axios
-            .post(`/auth/login`,{
-                "email" : loginForm.email,
-                "password" : loginForm.password
-            })
-            .then((response: any) => {
-                console.log(response.data.message);
-                alert(response.data.message);
-            });
-        }
-        catch (error: any){
-            console.log(error.message);
-            alert(error.message);
-        }
-    };
 
     const register = async () => {
         console.log(registerForm)
@@ -68,7 +53,12 @@ interface AuthProps {
                 <h1>Login</h1>
                 Email: <input type="email" onChange={(e)=>setLoginForm({...loginForm, email:e.target.value})} />
                 Password: <input type="password" onChange={(e)=>setLoginForm({...loginForm, password:e.target.value})} />
-                <button onClick={login}>Login</button>
+                <button onClick={()=>login(loginForm.email,loginForm.password)}>Login</button>
+            </div>
+            <hr/>
+            <div className="logout">
+                <h1>Logout</h1>
+                <button onClick={()=>logout()}>Logout</button>
             </div>
             <hr/>
             <div className="register">
@@ -84,6 +74,6 @@ interface AuthProps {
         </div>
         
     );
-  };
+};
 
 export default Auth;

@@ -1,0 +1,25 @@
+.FindStudent{
+    .FindStudentFooter{
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        p{
+            color: var(--secondary);
+            opacity: .8;
+        }
+        h6{
+            opacity: .8;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        h6:hover{
+            opacity: 1;
+        }
+    }
+}
+.AddCase{
+    display: flex;
+    gap: 15px;
+    
+}

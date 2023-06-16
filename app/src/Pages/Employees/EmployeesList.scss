@@ -1,0 +1,100 @@
+.employeeCard{
+    position: relative; 
+    width: 260px;
+    padding-top: 55px;
+    a{
+        padding: 1em;
+        display: block;
+        .employeeCard_Information{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .employeeAvatar{
+                width: 70px;
+                height: 70px;
+                margin-bottom: 15px;
+            }
+            h6{
+                margin-bottom: 5px;
+                color: var(--secondary);
+            }
+            p{
+                color: var(--secondary);
+                opacity: .8;
+            }
+        }
+        .employeeCard__Footer{
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            color: var(--secondary);
+            .Footer__Info{
+                opacity: .6;
+                div{
+                    display: flex;
+                    gap: 5px;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    h6{
+                        color: inherit;
+                    }
+                }
+                p{
+                    color: inherit;
+                }
+            }
+            .Footer__Info:nth-child(2){
+                div{
+                    justify-content: end;
+                }
+                p{
+                text-align: end;
+
+                }
+            }
+        }
+    }
+    .employeeCard__HeaderContainer{
+        position: absolute;
+        top: 1em;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 92%;
+        display: flex;
+        align-items: center;
+        .Status{
+            flex-grow: 1;
+            position: relative;
+            margin-left: 25px;
+            color: gray;
+            h6{
+                color: inherit;
+            }
+        }
+        .Status::before{
+            content: "";
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            border-radius: 20px;
+            height: 10px;
+            background-color: gray;
+        }
+    }
+    
+}
+.employeeCard:hover{
+    background-color: rgb(243, 243, 243);
+}
+.active{
+    .employeeCard__HeaderContainer{
+        .Status{
+            color: #05AD75;
+        }
+        .Status::before{
+            background-color: #05AD75;
+        }
+    }
+}

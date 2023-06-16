@@ -61,10 +61,10 @@ function StudentView() {
 
     useEffect(() => {
         fetchStudent();
-        fetchCases();
+        // fetchCases();
     }, [])
 
-    if(!student | !cases) return <div>Loading...</div>
+    if(!student) return <div>Loading...</div>
 
     return (
         <div className='ProfileTemplate StudentView'>

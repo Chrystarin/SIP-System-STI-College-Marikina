@@ -57,6 +57,7 @@ export const getSIPs: RequestHandler = async (req, res) => {
         modelQuery.schoolYear = { $in: schoolYears.map((schoolYear) => schoolYear._id) };
     } else {
         const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
+        console.log(schoolYear)
         if (schoolYear[0] === undefined) throw new UnprocessableEntity('School Year not started yet');
 
         const [year, prop] = schoolYear;

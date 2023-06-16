@@ -13,7 +13,20 @@ import { useNavigate} from 'react-router-dom';
 function CaseTableView(props:any) {
     const navigate = useNavigate();
 
-    const {data} = props;
+    let {data} = props;
+
+    
+
+    const tableData = [
+        {id:"0904232", name:"Harold James H. Castillo",section:"CS801P", cases:"45",sip :"5"},
+        {id:"0904232", name:"Dianne Chrystalin B. Castillo",section:"CS801P", cases:"45",sip :"5"},
+        {id:"0904232", name:"Jon Angelo Llagas",section:"CS801P", cases:"45",sip :"5"},
+        {id:"0904232", name:"Gian Carlo Dela Cruz",section:"CS801P", cases:"45",sip :"5"}
+    ]
+
+    if (!data){
+        data = tableData;
+    }
 
     return (
         <TableContainer component={Paper}>

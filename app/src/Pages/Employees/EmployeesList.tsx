@@ -51,7 +51,7 @@ function EmployeesList() {
     useEffect(() => {
         fetchModerators();
         fetchTeachers();
-    }, [])
+    }, [teachers, moderators])
 
     if (!moderators || !teachers) return <div>Loading...</div>
 

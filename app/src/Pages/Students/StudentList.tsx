@@ -3,8 +3,11 @@ import Button from '@mui/material/Button/Button';
 import SearchInput from '../../Components/SearchInput/SearchInput';
 import CaseTableView from '../../Components/CaseTableView/CaseTableView';
 import axios from './../../Utils/Axios';
+import { useNavigate } from 'react-router-dom';
 
 function StudentList() {
+
+    const navigate = useNavigate();
 
     const [students, setStudents] = useState();
 
@@ -36,7 +39,7 @@ function StudentList() {
                 <div className='ContentLayout1__Extended'>
                     <SearchInput/>
                 </div>
-                <div><Button variant='contained'>Add Student</Button></div>
+                <div><Button variant='contained' onClick={()=>navigate("/test/student")}>Add Student</Button></div>
             </div>
             <CaseTableView students={students}/>
         </div>

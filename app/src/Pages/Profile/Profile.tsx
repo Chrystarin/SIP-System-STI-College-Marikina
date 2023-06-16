@@ -42,7 +42,7 @@ function Profile() {
                 }
             })
             .then((response: any) => {
-                console.log(response);
+                console.log(response.data);
                 const objectsArray = response.data.map((obj: any) => ({
                     ...obj,
                     updatedAt: new Date(obj.updatedAt)
@@ -61,7 +61,7 @@ function Profile() {
         fetchSips();
     }, [])
 
-    if (!user) return <div>Loading...</div>
+    if (!user || !sips) return <div>Loading...</div>
 
     return (
         <div className='ProfileTemplate'>
@@ -95,8 +95,10 @@ function Profile() {
             <div className='ContentNavigation'>
             <div className='paper ContentNavigation__Container active'>
                 <div className='ContentNavigation__Information'>
-                <h6>SIP Cases</h6>
-                <h1>400</h1>
+                <h6>SIP Total</h6>
+                <h1>
+                    {sips.length}
+                </h1>
                 </div>
                 <div className='ContentNavigation__Footer' onClick={()=>{setStepper(1)}}>
                 <p>View List</p>
@@ -104,20 +106,10 @@ function Profile() {
 
                 </div>
             </div>
-            <div className='paper ContentNavigation__Container '>
-                <div className='ContentNavigation__Information'>
-                <h6>SIP Cases</h6>
-                <h1>400</h1>
-                </div>
-                <div className='ContentNavigation__Footer' onClick={()=>{setStepper(2)}}>
-                <p>View List</p>
-                <NavigateNextIcon/>
-                </div>
-            </div>
+
             </div>
             <div className=' ContentNavigation__Table'>
-            {stepper===1?<CaseTableView/>:""}
-            {stepper===2?<CaseTableView/>:""}
+                <CaseTableView cases={sips}/>
             </div>
         </div>
         </div>

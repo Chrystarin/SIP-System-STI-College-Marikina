@@ -20,12 +20,12 @@ function AddCase() {
         semester:""
     });
 
-    useEffect(() => {
-        // Only if theres a selected student will proceed to part 2
-        if(student!==""){
-            setStepper(2)
-        }
-    },[student]);
+    // useEffect(() => {
+    //     // Only if theres a selected student will proceed to part 2
+    //     if(student!==""){
+    //         setStepper(2)
+    //     }
+    // },[student]);
     return (
         <form className='FormTemplate'>
             <h4 className='Form__Title'>ADD NEW CASE</h4>
@@ -44,19 +44,19 @@ function AddCase() {
                         </div>
                     </div>
                     <div className='FindStudent__Results'>
-                        <CaseTableView/>
+                        {/* <CaseTableView/> */}
                     </div>
                 </div>
             </>:""}
             {stepper===2?<>
                 <div className='Form__Section '>
                     <h6 className='Section__Title'>STUDENT INTERVENTION FORM</h6>
-                    <SIPPreview/>
+                    {/* <SIPPreview/> */}
                 </div>
                 <div className='Form__Section '>
                     <h6 className='Section__Title'>STUDENT CASES</h6>
                     <p className='Form__SubTitle'>2 Active Cases</p>
-                    <StudentCases/>
+                    {/* <StudentCases/> */}
                     <div className='AddCase'>
                         <FormControl fullWidth sx={{  minWidth: 200 }}>
                             <InputLabel id="demo-simple-select-label">Case Type</InputLabel>
@@ -119,7 +119,7 @@ function AddCase() {
                     </div>
                 </div>
                 <div className='Button__Container'>
-                    <Button variant='text'>back</Button>
+                    <Button variant='text'>Back</Button>
                     <Button variant='contained'>Submit</Button>
                 </div>
             </>:""}

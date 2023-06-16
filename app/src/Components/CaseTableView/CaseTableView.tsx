@@ -67,7 +67,6 @@ function CaseTableView(props:any) {
                             <TableCell ><h6>SIP ID</h6></TableCell>
                             <TableCell align="right"><h6>Student</h6></TableCell>
                             <TableCell align="right"><h6>Created On</h6></TableCell>
-                            <TableCell align="right"><h6>Last Updated On</h6></TableCell>
                             <TableCell align="right"><h6>Status</h6></TableCell>
                             <TableCell align="right"><h6>Active Cases</h6></TableCell>
                         </TableRow>
@@ -85,7 +84,6 @@ function CaseTableView(props:any) {
                                     <p>{row.student.name.first} {row.student.name.last}</p>
                                 </TableCell>
                                 <TableCell align="right"><p>{row.createdAt}</p></TableCell>
-                                <TableCell align="right"><p>{row.updatedAt}</p></TableCell>
                                 <TableCell align="right"><p>{(row.status).toUpperCase()}</p></TableCell>
                                 <TableCell align="right">
                                     <p>

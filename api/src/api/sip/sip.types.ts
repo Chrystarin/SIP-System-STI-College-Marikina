@@ -1,7 +1,7 @@
 import { SchoolYearDocument } from '../schoolYear/schoolYear.model';
 import { IssuerDocument, SIPDocument } from './sip.model';
 import { Student, StudentDocument } from '../student/student.model';
-import { User, UserDocument } from '../user/user.model';
+import { User } from '../user/user.model';
 
 /* ENUMS */
 

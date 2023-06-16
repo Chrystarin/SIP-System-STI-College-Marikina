@@ -13,6 +13,7 @@ function AddEmployee() {
     const [registerForm, setRegisterForm] = useState({
         employeeId: '',
         firstName: '',
+        middleName: '',
         lastName: '',
         role: '',
         email: ''
@@ -28,6 +29,7 @@ function AddEmployee() {
                 role : registerForm.role,
                 name : {
                     first : registerForm.firstName,
+                    middle : registerForm.middleName,
                     last : registerForm.lastName
                 },
                 email : registerForm.email
@@ -53,13 +55,20 @@ function AddEmployee() {
             </div>
             <div className='Form__Section'>
                 <h6 className='Section__Title'>Section Title</h6>
-                <div className='Form_Questions wrapperForm_4_2'>
+                <div className='Form_Questions wrapperForm_3'>
                     <TextField 
                         id="outlined-basic" 
                         label="First Name" 
                         variant="outlined"
                         required
                         onChange={(e)=>setRegisterForm({...registerForm, firstName:e.target.value})}
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Middle Name" 
+                        variant="outlined"
+                        required
+                        onChange={(e)=>setRegisterForm({...registerForm, middleName:e.target.value})}
                     />
                     <TextField 
                         id="outlined-basic" 

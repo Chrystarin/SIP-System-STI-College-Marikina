@@ -45,6 +45,25 @@ function EmployeeCard(props:any) {
         handleClose();
     };
 
+    const updateStatus = async () => {
+        try{
+            await axios
+            .patch(`/users/updateStatus`,{
+                employeeId : id,
+                status : status === 'active' ? 'inactive' : 'active'
+            })
+            .then((response: any) => {
+                console.log(response.data);
+                alert("This user has been set to " + (status === 'active' ? 'inactive' : 'active'));
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.message);
+        }
+        handleClose();
+    };
+
     return (
         <div className='paper employeeCard active'>
             <div className='employeeCard__HeaderContainer'>
@@ -68,7 +87,7 @@ function EmployeeCard(props:any) {
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
                     <MenuItem onClick={resetPassword}>Reset Password</MenuItem>
-                    <MenuItem onClick={handleClose}>Set Inactive</MenuItem>
+                    <MenuItem onClick={updateStatus}>Set {status === 'active' ? 'inactive' : 'active'}</MenuItem>
                 </Menu>
             </div>
             <a href={`/employees/${id}`} >
@@ -78,20 +97,22 @@ function EmployeeCard(props:any) {
                     <p>ID:{id}</p>
                 </div>
                 <div className='employeeCard__Footer'>
-                    <div className='Footer__Info'>
+                    {/* <div className='Footer__Info'>
                         <div>
                             <BusinessCenterIcon/>
                             <h6 className='BodyText1'>Case Closed</h6>
                         </div>
                         <p>{cases?.length}</p>
-                    </div>
-                    <div className='Footer__Info'>
+                    </div> */}
+                    {/* <div className='Footer__Info'>
                         <div>
                             <CalendarMonthIcon/>
                             <h6 className='BodyText1 '>Registered On</h6>
                         </div>
-                        <p>{registerDate}</p>
                     </div>
+                    <div className='Footer__Info'>
+                        <p>{registerDate}</p>
+                    </div> */}
                 </div>
             </a>
             

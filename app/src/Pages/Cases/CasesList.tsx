@@ -8,8 +8,9 @@ function CasesList() {
   const [stepper,setStepper] = useState("Active");
   const [pending, setPending] = useState([])
   const [closed, setClosed] = useState([])
-  const [resolved, setResolved] = useState([])
-  const [noResponse, setNoResponse] = useState([])
+  
+  let resolved: any = []
+  let noResponse: any = []
 
     const fetchPendingCases = async () => {
         try{
@@ -20,7 +21,6 @@ function CasesList() {
                 }
             })
             .then((response: any) => {
-                console.log(response.data);
                 setPending(response.data)
             });
         }
@@ -39,8 +39,7 @@ function CasesList() {
                 }
             })
             .then((response: any) => {
-                console.log(response.data);
-                setResolved(response.data)
+                resolved = response.data;
             });
         }
         catch (error: any){
@@ -58,8 +57,7 @@ function CasesList() {
                 }
             })
             .then((response: any) => {
-                console.log(response.data);
-                setNoResponse(response.data)
+                noResponse = response.data;
             });
         }
         catch (error: any){
@@ -69,17 +67,19 @@ function CasesList() {
     };
 
     const fetchClosedCases = async () => {
-        fetchNoResponseCases();
-        fetchResolvedCases();
+        await fetchNoResponseCases();
+        await fetchResolvedCases();
         setClosed(resolved.concat(noResponse));
     }
+
 
     useEffect (() => {
         fetchPendingCases();
         fetchClosedCases();
     }, []);
 
-    if (!pending && !closed) return <div>Loading...</div>
+    if (!pending || !closed) 
+        return <div>Loading...</div>
 
     return <>
         <div className=' ContentLayout1'>

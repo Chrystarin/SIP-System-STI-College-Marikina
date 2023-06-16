@@ -1,6 +1,7 @@
 import { SchoolYearDocument } from '../schoolYear/schoolYear.model';
 import { SIPDocument } from './sip.model';
 import { Student, StudentDocument } from '../student/student.model';
+import { User, UserDocument } from '../user/user.model';
 
 /* ENUMS */
 
@@ -46,6 +47,7 @@ export enum SIPStatus {
 
 export type SIPQuery = {
     sipId?: SIPDocument['sipId'];
+    employeeId?: User['employeeId'];
     studentId?: StudentDocument['studentId'];
     status?: SIPDocument['status'];
     schoolYearStart?: string;
@@ -57,6 +59,7 @@ export type SIPModelQuery = {
     student?: StudentDocument['_id'];
     status?: SIPDocument['status'];
     schoolYear?: { $in: Array<SchoolYearDocument['_id']> } | SchoolYearDocument['_id'];
+    'cases.$.issuer'?: UserDocument['_id'];
 };
 
 export type AddCase = {

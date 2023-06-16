@@ -2,7 +2,7 @@ import { AddCase, CaseKeys, CaseTypes, SIPModelQuery, SIPQuery, SIPStatus } from
 import { genSIPid } from '../../utilities/generateId';
 import { NotFound, Unauthorized, UnprocessableEntity } from '../../utilities/errors';
 import { Request, RequestHandler } from 'express';
-import { UserDocument } from '../user/user.model';
+import UserModel, { UserDocument } from '../user/user.model';
 import SchoolYearModel, { SchoolYearDocument } from '../schoolYear/schoolYear.model';
 import SipModel, { IssuerDocument, SIP, SIPDocument, SIPPopulatedDocument } from './sip.model';
 import StudentModel, { StudentDocument } from '../student/student.model';
@@ -25,12 +25,18 @@ const getCaseKey = (caseType: CaseTypes): CaseKeys => {
 };
 
 export const getSIPs: RequestHandler = async (req, res) => {
-    const { sipId, studentId, status, schoolYearStart, schoolYearEnd } = <SIPQuery>(<unknown>req.query);
+    const { sipId, employeeId, studentId, status, schoolYearStart, schoolYearEnd } = <SIPQuery>(<unknown>req.query);
 
     const modelQuery: SIPModelQuery = {};
 
     if (sipId) modelQuery.sipId = sipId;
     if (status) modelQuery.status = status;
+
+    if(employeeId) {
+        const employee: UserDocument | null = await UserModel.findOne({ employeeId }, { _id: 1 }).exec();
+        if(employee === null) throw new NotFound('Employee not saved yet');
+        modelQuery['cases.$.issuer'] = employee._id;
+    }
 
     if (studentId) {
         const student: StudentDocument | null = await StudentModel.findOne({ studentId }, { _id: 1 }).exec();
@@ -75,7 +81,6 @@ export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, re
 
     const { modifiedCount } = await SipModel.updateOne({ sipId }, { $set: { status } }).exec();
     if (modifiedCount === 0) throw new NotFound('SIP not existing');
-
     res.json({ message: 'SIP status updated' });
 };
 

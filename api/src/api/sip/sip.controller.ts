@@ -57,15 +57,15 @@ export const getSIPs: RequestHandler = async (req, res) => {
         modelQuery.schoolYear = { $in: schoolYears.map((schoolYear) => schoolYear._id) };
     } else {
         const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
-        console.log(schoolYear)
-        if (schoolYear[0] === undefined) throw new UnprocessableEntity('School Year not started yet');
+        
+        if (schoolYear[0] !== undefined) {
+            const [year, prop] = schoolYear;
 
-        const [year, prop] = schoolYear;
+            const SY: SchoolYearDocument | null = await SchoolYearModel.findOne({ [prop]: new Date(year).getFullYear() }, { _id: 1 }).exec();
+            if (SY === null) throw new UnprocessableEntity("School Year doesn't saved yet");
 
-        const SY: SchoolYearDocument | null = await SchoolYearModel.findOne({ [prop]: new Date(year).getFullYear() }, { _id: 1 }).exec();
-        if (SY === null) throw new UnprocessableEntity("School Year doesn't saved yet");
-
-        modelQuery.schoolYear = SY._id;
+            modelQuery.schoolYear = SY._id;
+        }
     }
 
     const SIPs: Array<SIPPopulatedDocument> = await SipModel.find(modelQuery)
@@ -78,15 +78,13 @@ export const getSIPs: RequestHandler = async (req, res) => {
 export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, res) => {
     const { sipId, status } = req.body;
 
-    console.log(req.body)
-
     const { modifiedCount } = await SipModel.updateOne({ sipId }, { $set: { status } }).exec();
     if (modifiedCount === 0) throw new NotFound('SIP not existing');
     res.json({ message: 'SIP status updated' });
 };
 
 export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res) => {
-    const { studentId, sipCase, term } = req.body;
+    const { studentId, sipCase, quarter } = req.body;
 
     if (req.user === undefined) throw new Unauthorized('Login first');
     const user: UserDocument = req.user;
@@ -111,7 +109,7 @@ export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res
 
     matchedCase.push({
         issuer: user._id,
-        term,
+        quarter,
         issuedAt: new Date()
     });
 

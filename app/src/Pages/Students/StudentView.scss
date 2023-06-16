@@ -1,0 +1,61 @@
+.StudentView{
+    .StudentView__SIP{
+        .AccordionParent{
+            position: relative;
+            .Accordion__Button{
+                z-index: 99;
+                position: absolute;
+                right: 45px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .Accordion__Summary{
+            width: 100%;
+            .Accordion__Summary__Title{
+                color: var(--secondary);
+                margin-bottom: 5px;
+            }
+
+
+            
+            .Accordion__Summary__Status{
+                position: relative;
+                margin-left: 15px;
+                color: var(--secondary);
+                opacity: .5;
+                
+            }
+            .Accordion__Summary__Status::before{
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: -15px;
+                transform: translateY(-50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 20px;
+                background-color: var(--secondary);
+            }
+            .Status__active{
+                opacity: 1;
+                color: #3DD442;
+            }
+            .Status__active::before{
+                background-color: #3DD442;
+            }
+        }
+        .Accordion__Content{
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+            .Accordion__Title{
+                margin-top: 25px;                                                                                                                                                                                                                                                       
+                color: var(--primary);
+            }
+            // background-color: red;
+        }
+    }
+}

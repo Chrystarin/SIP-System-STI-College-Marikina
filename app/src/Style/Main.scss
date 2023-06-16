@@ -1,9 +1,15 @@
 :root {
     // Color to set up "var(--accent)"
     --primary: #2E86DF;
+    --primary2: #E9F4FF;
+    --secondary: rgb(87, 87, 87);
     --maxWidth: 1900px ; 
-    --Shadow: 0 0 20px rgba(0, 0, 0, 0.229);    
+    --Shadow: 0 0 20px rgba(0, 0, 0, 0.131);    
     font-size: 15px;
+}
+html,body{
+    width: 100%;
+    height: 100%;
 }
 *{
     padding: 0;
@@ -34,16 +40,16 @@ h6{
     font-size: 1.07rem;
 }
 p{
-    font-size: 1nrem;
+    font-size: 1rem;
 }
 .BodyText1{
-    font-size: 1.8rem;
+    font-size: .8rem;
 }
 .BodyText2{
-    font-size: 1.6rem;
+    font-size: .6rem;
 }
 .BodyText3{
-    font-size: 1;
+    font-size: .5rem;
 }
 
 // html:not([data-scroll='0']) {
@@ -65,7 +71,6 @@ p{
         display: flex;
         align-items: center;
         padding: 0 1.5em ;
-        
         .LogoContainer{
             flex-grow: 1;
             height: 60%;
@@ -84,34 +89,454 @@ p{
                 }
             }
         }
-
+        
         
     }
 }
 
 .Layout{
+    max-width: 1920px;
+    margin: auto;
     display: flex;
+
     .SideNavigation{
-        background-color: red($color: #000000);
+        position: relative;
         box-shadow: var(--Shadow);
-        height: 100vh;
+        min-height: 100vh;
         width: 200px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        
+        @media (max-width: 800px) {
+            display: none;
+        }  
+        .Sticky{
+            position: sticky;
+            top:0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        } 
         #Logo{
-            margin: 25px 0;
-            width: 80%;
+            height: 40px;
+            margin: 25px 0 45px;
         }
         .NavigationButtons{
             width: 100%;
             display: flex;
+            list-style: none;
+            flex-direction: column;
+            // gap: 15px;
+            li{
+                a{
+                    display: flex;
+                    align-items: center;
+                    padding: 15px 0 15px 10px;
+                    gap: 5px;
+                    color: var(--secondary);
+
+                }
+                
+                p{
+                    color: inherit;
+                }
+                a.active{
+                    position: relative;
+                    color: var(--primary);
+                    ::after{
+                        content: "";
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: var(--primary);
+                        width: 5px;
+                        height: 80%;
+                    }
+                }
+                a:hover{
+                    background-color: rgb(234, 234, 234);
+                }
+            }
+        }
+        .SideNavigation__NewCase{
+            margin-top: 80px;
+            background-color: var(--primary2);
+            padding: 1em;
+            width: 85%;
+            border-radius: 8px;
+            display: flex;
             flex-direction: column;
             gap: 15px;
-            li{
-            background-color: red;
-
+            img{
+                width: 90%;
+                margin-top: -45px;
             }
+            p{
+                color: var(--primary);
+                text-align: center;
+                line-height: 20px;
+                font-weight: 500;
+            }
+        }
+    }
+    
+    .SideNavigation::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 100%;
+        height: 100%;
+        background-color: white;
+        width: 100vh;
+    }
+    .Content{
+        flex-grow: 1;
+        padding: 0 1em 1em;
+        .Header{
+            display:flex;
+            margin:25px 0 45px;
+            width: 100%;
+            .SearchInputHolder{
+                flex-grow: 1;
+                display: flex;
+                align-items: center;
+            }
+            .ProfileDropdownButton{
+                height: 40px;
+                width: 40px;
+            }
+        }
+        .ContentLayout1{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .ContentLayout1__Title{
+                margin-bottom: 10px;
+                color: var(--primary);
+            }
+            .ContentLayout1__Navigation{
+                display: flex;
+                gap: 15px;
+            }
+            .ContentLayout1__Tools{
+                display: flex;
+                align-items: center;
+                .ContentLayout1__Extended{
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
+}
+.paper{
+    box-shadow: var(--Shadow);
+    background-color: white;
+    border-radius: 8px;
+}
+
+.ProfileTemplate{
+    display: flex;
+    gap: 25px;
+    .SidePanel{
+        width: 300px;
+        .Sticky{
+            width: 100%;
+            .ProfileImage{
+                margin: auto;
+                width: 150px;
+                height: 150px;
+                border: 5px solid white ;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.034);
+            }
+            .UserInformation{
+                margin-top: -75px;
+                padding: 100px 1em 1em;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: var(--Shadow);
+                .Name{
+                    margin-bottom: 10px;
+                    color: var(--secondary);
+                }
+                .Title{
+                    font-weight: 500;
+                    color: var(--primary);
+                    margin-bottom: 25px;
+                }
+                .Name ,.Title{
+                    text-align: center;
+                }
+                ul{
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    li{
+                        h6{
+                            margin-bottom: 5px;
+                        }
+                        h6,p{
+                            color: var(--secondary);
+                        }
+                    }
+                }
+                .Updatebutton{
+                    margin-top: 25px;
+                }
+            }
+        }
+    }
+    .Profile__Content{
+        flex-grow: 1;
+        display: flex;
+        gap: 25px;
+        flex-direction: column;
+        margin-top: 75px;
+        .ContentNavigation{
+            display: flex;
+            gap: 25px;
+            .ContentNavigation__Container{
+                width: 250px;
+                overflow: hidden;
+                color: var(--secondary);
+                .ContentNavigation__Information{
+                    padding: 1em;
+                    opacity: .9;
+                    h6{
+                        color: inherit;
+                    }
+                    h1{
+                        color: inherit;
+                    }
+                }
+                .ContentNavigation__Footer{
+                    background: var(--secondary);
+                    padding: 1em;
+                    cursor: pointer;
+                    display: flex;
+                    color: white;
+
+                    p{
+                        color: inherit;
+                        flex-grow: 1;
+                    }
+                }
+            }
+            .active{
+                color: var(--primary);
+            }
+        }
+        .ContentNavigation__Table{
+            width: 100%;
+        }
+    }
+}
+
+.FormTemplate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+    padding-bottom: 25px;
+    .Form__Title{
+        text-align: center;
+        color: var(--primary);
+    }
+    .Form__SubTitle{
+        margin-top: -45px;
+        opacity: .8;
+        color: var(--secondary);
+    }
+    .Form__Stepper{
+        display: flex;
+        gap: 55px;
+        position: relative;
+        button{
+            background-color: #dde9f5;
+            border: 2px solid #BDD7F1;
+            padding: .5em 2em;
+            border-radius: 20px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+        button.active{
+            background-color: var(--primary);
+            color: white;
+        }
+    }
+    .Form__Stepper::after{
+        content: "";
+        width: 80%;
+        height: 2px;
+        background-color: #BDD7F1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -20;
+        transform: translate(-50%,-50%);
+    }
+    .Form__Section{
+        background-color: #FBFBFC;
+        width: 100%;
+        padding: 2em 1em;
+        border-radius: 8px;
+        border: 1px solid #e0e8f0;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.071);
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+        .Section__Title{
+            color: var(--primary);
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        .Form_Questions{
+            width: 80%;
+        }
+        .wrapperForm_Name{
+            display: grid;
+            grid-template-columns: 1fr .4fr 1fr .4fr;
+            gap: 25px;
+            justify-content: center;
+        }
+        .wrapperForm_3{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+        }
+    }
+    .Button__Container{
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        gap: 15px;
+        padding: 1em;
+    }
+}
+.WrapperCard{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+.SIP__Preview{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .SIP__Information{
+        list-style: none;
+        display: flex;
+        gap: 35px;
+        
+    }
+    .Student__Information{
+        .Student__Card{
+            padding: 1em;
+            gap: 15px;
+            display: flex;
+            align-items: center;
+            .Student__Card__Avatar{
+                width: 45px;
+                height: 45px;
+            }
+            .Student__Card__Information{
+                .Student__Card__Information__Name{
+                    color: var(--secondary);
+                    margin-bottom: 3px;
+                }
+                ul{
+                    display: flex;
+                    gap: 10px;
+                }
+                
+            }
+
+        }
+        .Student__MoreInfo{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: auto;
+            width: 90%;
+            margin-top: 25px;
+            li{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                color: var(--secondary);
+                p{
+                    color: inherit;
+                }
+            }
+        }
+    }
+    .StudentCase{
+        margin-top: 25px;
+        table{
+            margin-top: 25px;
+            margin-left: 35px;
+            border-left: 4px solid rgba(0, 0, 0, 0.064);
+            tr{
+                p{
+                    opacity: .7;
+                }
+                row-gap: 25px;  
+            }
+            th{
+                text-align: start;
+                padding: 1em;
+            }
+            td{
+                padding: 1em;
+            }
+            .TDName{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                .TDName__Avatar{
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+        }
+    }
+}
+
+
+.TitleValue{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    .TitleValue__Title{
+        opacity: .8;
+        color: var(--secondary);
+    }
+    .TitleValue__Value{
+        opacity: 1;
+        color: var(--secondary);
+    }
+}
+.ProfileDropdown{
+    .ProfileDropdown__Info{
+        padding: 2em 1em;
+        text-align: center;
+    }
+    .ProfileDropdown__Navigation{
+        list-style: none;
+        li{
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 1em;
+            cursor: pointer;
+        }
+        li:hover{
+            background-color: rgb(246, 246, 246);
         }
     }
 }

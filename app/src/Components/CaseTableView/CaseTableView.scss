@@ -1,0 +1,15 @@
+.CaseTableView{
+    .CaseTableView__row:hover{
+        cursor: pointer;
+        background-color: rgb(245, 245, 245);
+    }
+}
+.NameHolder{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .NameHolder__Avatar{
+        height: 35px;
+        width: 35px;
+    }
+}

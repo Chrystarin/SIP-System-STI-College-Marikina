@@ -13,9 +13,7 @@ import { useNavigate} from 'react-router-dom';
 function CaseTableView(props:any) {
     const navigate = useNavigate();
 
-    let {data} = props;
-
-    
+    let {students, cases, data} = props;
 
     const tableData = [
         {id:"0904232", name:"Harold James H. Castillo",section:"CS801P", cases:"45",sip :"5"},
@@ -30,38 +28,77 @@ function CaseTableView(props:any) {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table" className='CaseTableView'>
-                <TableHead>
-                    <TableRow>
-                        <TableCell><h6>Name</h6></TableCell>
-                        <TableCell align="right"><h6>ID</h6></TableCell>
-                        <TableCell align="right"><h6>Registered Since</h6></TableCell>
-                        <TableCell align="right"><h6>Active Cases</h6></TableCell>
-                        <TableCell align="right"><h6>Total SIP</h6></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((row:any) => (
-                        <TableRow
-                        key={row.studentId}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        className='CaseTableView__row'
-                        
-                        >
-                            <TableCell onClick={()=>navigate(`/students/${row.studentId}`)} component="th" scope="row" >
-                                <div className='NameHolder'>
-                                    <Avatar className='NameHolder__Avatar'/>
-                                    <p>{row.name.first} {row.name.last}</p>
-                                </div>
-                            </TableCell>
-                            <TableCell align="right"><p>{row.studentId}</p></TableCell>
-                            <TableCell align="right"><p>{row.createdAt}</p></TableCell>
-                            <TableCell align="right"><p>{row.cases}</p></TableCell>
-                            <TableCell align="right"><p>{row.sip}</p></TableCell>
+            {!students ? '' :
+                <Table sx={{ minWidth: 650 }} aria-label="simple table" className='CaseTableView'>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell><h6>Name</h6></TableCell>
+                            <TableCell align="right"><h6>ID</h6></TableCell>
+                            <TableCell align="right"><h6>Registered Since</h6></TableCell>
+                            <TableCell align="right"><h6>Last Updated</h6></TableCell>
                         </TableRow>
-                    ))} 
-                </TableBody>
-            </Table>
+                    </TableHead>
+                    <TableBody>
+                        {students.map((row:any) => (
+                            <TableRow
+                                key={row.studentId}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                className='CaseTableView__row'
+                                onClick={()=>navigate(`/students/${row.studentId}`)}
+                            >
+                                <TableCell  component="th" scope="row" >
+                                    <div className='NameHolder'>
+                                        <Avatar className='NameHolder__Avatar'/>
+                                        <p>{row.name.first} {row.name.last}</p>
+                                    </div>
+                                </TableCell>
+                                <TableCell align="right"><p>{row.studentId}</p></TableCell>
+                                <TableCell align="right"><p>{row.updatedAt}</p></TableCell>
+                                <TableCell align="right"><p>{row.createdAt}</p></TableCell>
+                            </TableRow>
+                        ))} 
+                    </TableBody>
+                </Table>
+        }
+        {!cases ? '' :
+                <Table sx={{ minWidth: 650 }} aria-label="simple table" className='CaseTableView'>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell ><h6>SIP ID</h6></TableCell>
+                            <TableCell align="right"><h6>Student</h6></TableCell>
+                            <TableCell align="right"><h6>Created On</h6></TableCell>
+                            <TableCell align="right"><h6>Last Updated On</h6></TableCell>
+                            <TableCell align="right"><h6>Status</h6></TableCell>
+                            <TableCell align="right"><h6>Active Cases</h6></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {cases.map((row:any) => (
+                            <TableRow
+                                key={row.sipId}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                className='CaseTableView__row'
+                                onClick={()=>navigate(`/students/${row.student.studentId}`)}
+                            >
+                                <TableCell align="right"><p>{row.sipId}</p></TableCell>
+                                <TableCell component="th" scope="row" >
+                                    <p>{row.student.name.first} {row.student.name.last}</p>
+                                </TableCell>
+                                <TableCell align="right"><p>{row.createdAt}</p></TableCell>
+                                <TableCell align="right"><p>{row.updatedAt}</p></TableCell>
+                                <TableCell align="right"><p>{(row.status).toUpperCase()}</p></TableCell>
+                                <TableCell align="right">
+                                    <p>
+                                        {row.cases.AEC.length + row.cases.DCP.length + 
+                                        row.cases.ETA.length + row.cases.LD.length + 
+                                        row.cases.UoaS.length}
+                                    </p>
+                                </TableCell>
+                            </TableRow>
+                        ))} 
+                    </TableBody>
+                </Table>
+        }
         </TableContainer>
     )
 }

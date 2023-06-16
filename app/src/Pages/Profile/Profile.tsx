@@ -10,6 +10,7 @@ function Profile() {
 
     const [stepper, setStepper] = useState(1);
     const [user, setUser] = useState<any>();
+    const [sips, setSips] = useState<any>();
     const {id} = useParams();
 
     const fetchUser = async () => {
@@ -31,8 +32,33 @@ function Profile() {
         }
     }
 
+    const fetchSips = async () => {
+        try{
+            await axios
+            .get(`/sips`, {
+                params:{
+                    employeeId: (!id) ? ((JSON.parse(localStorage.getItem('user') || ''))?.employeeId) : id
+                    // employeeId: 'EMP001'
+                }
+            })
+            .then((response: any) => {
+                console.log(response);
+                const objectsArray = response.data.map((obj: any) => ({
+                    ...obj,
+                    updatedAt: new Date(obj.updatedAt)
+                }));
+                setSips(objectsArray.sort((a:any, b:any) => b.updatedAt - a.updatedAt))
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.message);
+        }
+    }
+
     useEffect(() => {
         fetchUser();
+        fetchSips();
     }, [])
 
     if (!user) return <div>Loading...</div>

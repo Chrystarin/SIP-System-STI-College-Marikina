@@ -38,7 +38,7 @@ function StudentList() {
                 </div>
                 <div><Button variant='contained'>Add Student</Button></div>
             </div>
-            <CaseTableView data={students}/>
+            <CaseTableView students={students}/>
         </div>
     </>
 }

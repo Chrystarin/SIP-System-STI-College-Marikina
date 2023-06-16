@@ -19,7 +19,7 @@ function StudentView() {
 
     const {id} = useParams();
     const [student, setStudent] = useState<any>();
-    const [cases, setCases] = useState<any>();
+    const [sips, setSips] = useState<any>();
 
     const fetchStudent = async () => {
         try{
@@ -40,7 +40,7 @@ function StudentView() {
         }
     }
 
-    const fetchCases = async () => {
+    const fetchSips = async () => {
         try{
             await axios
             .get(`/sips`, {
@@ -49,8 +49,12 @@ function StudentView() {
                 }
             })
             .then((response: any) => {
-                console.log(response);
-                setCases(response.data)
+                console.log(response.data);
+                const objectsArray = response.data.map((obj: any) => ({
+                    ...obj,
+                    updatedAt: new Date(obj.updatedAt)
+                }));
+                setSips(objectsArray.sort((a:any, b:any) => b.updatedAt - a.updatedAt))
             });
         }
         catch (error: any){
@@ -61,10 +65,10 @@ function StudentView() {
 
     useEffect(() => {
         fetchStudent();
-        // fetchCases();
+        fetchSips();
     }, [])
 
-    if(!student) return <div>Loading...</div>
+    if(!student || !sips) return <div>Loading...</div>
 
     return (
         <div className='ProfileTemplate StudentView'>
@@ -93,7 +97,7 @@ function StudentView() {
             <div className='paper ContentNavigation__Container active'>
                 <div className='ContentNavigation__Information'>
                 <h6>SIP Cases</h6>
-                <h1>400</h1>
+                <h1>{sips.length}</h1>
                 </div>
                 <div className='ContentNavigation__Footer' onClick={()=>{alert()}}>
                 <p>View List</p>
@@ -103,69 +107,49 @@ function StudentView() {
             </div>
             <div className='StudentView__SIP'>
             <div>
-                <Accordion>
-                <div className='AccordionParent'>
-                    <div className='Accordion__Button'>
-                    <IconButton >
-                        <MoreHorizIcon />
-                    </IconButton>
-                    </div>
-                    
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    
-                    >
-                    <div className='Accordion__Summary'>
-                        <h6 className='Accordion__Summary__Title'>SY: 2022 - 2023 | 2nd Semester | Prefinals</h6>
-                        <p className='Accordion__Summary__Status Status__active'>Active</p>
+                {Array.isArray(sips) && sips.length > 0 && sips.map((sip: any) => {
+                    return (
+                    <Accordion>
+                        <div className='AccordionParent'>
+                            <div className='Accordion__Button'>
+                            {/* <IconButton >
+                                <MoreHorizIcon />
+                            </IconButton> */}
+                            </div>
+                            
+                            <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            
+                            >
+                            <div className='Accordion__Summary'>
+                                <h6 className='Accordion__Summary__Title'>S.Y. {sip.schoolYear.start} - {sip.schoolYear.end ?? (sip.schoolYear.start+1)}</h6>
+                                {sip.status === "pending"
+                                    ? <p className='Accordion__Summary__Status Status__active'>Pending</p>
+                                    : sip.status === "resolved"
+                                        ? <p className='Accordion__Summary__Status Status__resolved'>Resolved</p>
+                                        : <p className='Accordion__Summary__Status '>No Response</p>
+                                }
+                            </div>
+                            </AccordionSummary>
+                        </div>
                         
-                    </div>
-                    </AccordionSummary>
-                </div>
-                
-                <AccordionDetails>
-                    <div className='Accordion__Content'>
-                    <h5 className='Accordion__Title'>STUDENT INTERVENTION FORM</h5>
-                    <SIPPreview/>
-                    <h5 className='Accordion__Title'>STUDENT CASES</h5>
-                    <StudentCases/>
-                    </div>
-                </AccordionDetails>
-                </Accordion>
-                
-                <Accordion>
-                <div className='AccordionParent'>
-                    <div className='Accordion__Button'>
-                    <IconButton >
-                        <MoreHorizIcon />
-                    </IconButton>
-                    </div>
-                    
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    
-                    >
-                    <div className='Accordion__Summary'>
-                        <h6 className='Accordion__Summary__Title'>SY: 2022 - 2023 | 2nd Semester | Prefinals</h6>
-                        <p className='Accordion__Summary__Status '>Close on Oct 25, 2000</p>
-                        
-                    </div>
-                    </AccordionSummary>
-                </div>
-                
-                <AccordionDetails>
-                    <div className='Accordion__Content'>
-                    <h5 className='Accordion__Title'>STUDENT INTERVENTION FORM</h5>
-                    <SIPPreview/>
-                    <h5 className='Accordion__Title'>STUDENT CASES</h5>
-                    <StudentCases/>
-                    </div>
-                </AccordionDetails>
-                </Accordion>
+                        <AccordionDetails>
+                            <div className='Accordion__Content'>
+                            <h5 className='Accordion__Title'>STUDENT INTERVENTION FORM</h5>
+                            <SIPPreview
+                                data={sip}
+                            />
+                            <h5 className='Accordion__Title'>STUDENT CASES</h5>
+                            <StudentCases
+                                cases={sip.cases}
+                            />
+                            </div>
+                        </AccordionDetails>
+                    </Accordion>
+                    );
+                })}
                 
             </div>
             </div>

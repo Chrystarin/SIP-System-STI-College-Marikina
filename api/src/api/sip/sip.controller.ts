@@ -69,7 +69,16 @@ export const getSIPs: RequestHandler = async (req, res) => {
     }
 
     const SIPs: Array<SIPPopulatedDocument> = await SipModel.find(modelQuery)
-        .populate([{ path: 'schoolYear', populate: { path: 'admin' } }, { path: 'closed.by' }])
+        .populate([
+            { path: 'schoolYear', populate: { path: 'admin' } }, 
+            { path: 'closed.by' }, 
+            { path: 'student' },
+            { path: 'cases.AEC.issuer'},
+            { path: 'cases.DCP.issuer'},
+            { path: 'cases.ETA.issuer'},
+            { path: 'cases.LD.issuer'},
+            { path: 'cases.UoaS.issuer'}
+        ])
         .exec();
 
     res.json(SIPs);
@@ -84,7 +93,7 @@ export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, re
 };
 
 export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res) => {
-    const { studentId, sipCase, quarter } = req.body;
+    const { studentId, sipCase, term } = req.body;
 
     if (req.user === undefined) throw new Unauthorized('Login first');
     const user: UserDocument = req.user;
@@ -109,7 +118,7 @@ export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res
 
     matchedCase.push({
         issuer: user._id,
-        quarter,
+        term,
         issuedAt: new Date()
     });
 

@@ -28,7 +28,7 @@ const SideNavigation = (props:SideNavigationProps)=> {
                 <li>
                     <a href="/cases" className={props.Active==="Cases"?"active":""}>
                         <WorkIcon/>  
-                        <p>Cases</p>
+                        <p>SIPs</p>
                     </a>
                 </li>
                 <li>

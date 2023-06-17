@@ -4,7 +4,8 @@
 	"description": "Insert backend files here",
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "rimraf dist && tsc",
+		// "build": "rimraf dist && tsc",
+        "build": "tsc",
 		"start": "node dist/index.js",
 		"dev": "nodemon src/index.ts",
         "rimraf": "./node_modules/rimraf/bin.js"
@@ -33,4 +34,5 @@
 		"@types/mongoose": "^5.11.97",
 		"@types/node": "^20.1.1"
 	}
+    
 }

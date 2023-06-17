@@ -26,7 +26,7 @@ const LandingPage: React.FC = () => {
                             organize the Student Investigatory Program process
                         </h3>
                         <div>
-                            <Button variant='contained'>Learn More</Button>
+                            <a href="#features"><Button variant='contained'>Learn More</Button></a>
                         </div>
                     </div>
                     <div className="Image">
@@ -35,7 +35,7 @@ const LandingPage: React.FC = () => {
                 </div>
             </header>
             
-            <div>
+            <div id='features'>
                 <h4>Features</h4>
                 <section id='Container_Section'>	
                     <div className='Container_Content_Section'>

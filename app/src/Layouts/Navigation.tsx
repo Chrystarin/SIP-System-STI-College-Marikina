@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Logo from './../Images/Resources/Branding/Logo.png';
+import LoginModal from './../Components/LoginModal/LoginModal';
 import { Button } from '@mui/material';
+
 function Navigation() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
     return <>
         <nav className='Navigation'>
             <div className='MainContainer'>
@@ -11,11 +22,11 @@ function Navigation() {
                     </a>
                 </div>
                 <ul className='NavButtons'>
-                    <li><a href=""><p className='BodyText2'>About</p></a></li>
-                    <li><a href="/test/auth"><Button variant='contained'>Login</Button></a></li>
+                    <li><Button variant='contained' onClick={handleOpenModal}>Login</Button></li>
                 </ul>
             </div>
         </nav>
+        <LoginModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </>
 }
 

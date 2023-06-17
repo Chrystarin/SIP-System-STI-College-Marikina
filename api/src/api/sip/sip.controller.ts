@@ -27,6 +27,16 @@ const getCaseKey = (caseType: CaseTypes): CaseKeys => {
 export const getSIPs: RequestHandler = async (req, res) => {
     const { sipId, employeeId, studentId, status, schoolYearStart, schoolYearEnd } = <SIPQuery>(<unknown>req.query);
 
+
+    console.log(req.query);
+
+    console.log(sipId ? 'true' : 'false');
+    console.log(employeeId ? 'true' : 'false');
+    console.log(studentId ? 'true' : 'false');
+    console.log(status ? 'true' : 'false');
+    console.log(schoolYearStart ? 'true' : 'false');
+    console.log(schoolYearEnd ? 'true' : 'false');
+
     const modelQuery: SIPModelQuery = {};
 
     if (sipId) modelQuery.sipId = sipId;

@@ -55,22 +55,6 @@ const Auth: React.FC<AuthProps> = (props) => {
                 Password: <input type="password" onChange={(e)=>setLoginForm({...loginForm, password:e.target.value})} />
                 <button onClick={()=>login(loginForm.email,loginForm.password)}>Login</button>
             </div>
-            <hr/>
-            <div className="logout">
-                <h1>Logout</h1>
-                <button onClick={()=>logout()}>Logout</button>
-            </div>
-            <hr/>
-            <div className="register">
-                <h1>Register</h1>
-                Employee ID: <input type="text" onChange={(e)=>setRegisterForm({...registerForm, employeeId:e.target.value})} />
-                Role: <input type="text" onChange={(e)=>setRegisterForm({...registerForm, role:e.target.value})} />
-                First Name: <input type="text" onChange={(e)=>setRegisterForm({...registerForm, firstName:e.target.value})} />
-                Last Name: <input type="text" onChange={(e)=>setRegisterForm({...registerForm, lastName:e.target.value})} />
-                Email: <input type="email" onChange={(e)=>setRegisterForm({...registerForm, email:e.target.value})} />
-                <button onClick={register}>Register</button>
-            </div>
-
         </div>
         
     );

@@ -41,7 +41,7 @@ const SideNavigation = (props:SideNavigationProps)=> {
             <div className='SideNavigation__NewCase'>
                 <img src={NewCase} alt="" />
                 <p>Only STI College Marikina Students can be added a new case</p>
-                <Button variant='contained' href='/case/add'>Add Case</Button>
+                <Button variant='contained' href='/test/sip'>Add Case</Button>
             </div>
             </div>
         </div>

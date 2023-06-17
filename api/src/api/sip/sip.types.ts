@@ -26,14 +26,14 @@ export enum Terms {
     SHSQ2 = 'Senior High School - Quarter 2',
     SHSQ3 = 'Senior High School - Quarter 3',
     SHSQ4 = 'Senior High School - Quarter 4',
-    TTY1PL = 'Tertiary - Term 1 - Prelims',
-    TTY1M = 'Tertiary - Term 1 - Midterms',
-    TTY1PF = 'Tertiary - Term 1 - Pre-Finals',
-    TTY1F = 'Tertiary - Term 1 - Finals',
-    TTY2PL = 'Tertiary - Term 2 - Prelims',
-    TTY2M = 'Tertiary - Term 2 - Midterms',
-    TTY2PF = 'Tertiary - Term 2 - Pre-Finals',
-    TTY2F = 'Tertiary - Term 2 - Finals',
+    TTY1PL = 'Tertiary - Semester 1 - Prelims',
+    TTY1M = 'Tertiary - Semester 1 - Midterms',
+    TTY1PF = 'Tertiary - Semester 1 - Pre-Finals',
+    TTY1F = 'Tertiary - Semester 1 - Finals',
+    TTY2PL = 'Tertiary - Semester 2 - Prelims',
+    TTY2M = 'Tertiary - Semester 2 - Midterms',
+    TTY2PF = 'Tertiary - Semester 2 - Pre-Finals',
+    TTY2F = 'Tertiary - Semester 2 - Finals',
     TTYSMR = 'Tertiary - Summer'
 }
 

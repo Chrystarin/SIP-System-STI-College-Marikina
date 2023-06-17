@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
+import { Form, useNavigate } from 'react-router-dom';
+
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import axios from './../../Utils/Axios';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Form, useNavigate } from 'react-router-dom';
+
+import axios from './../../Utils/Axios';
 
 function AddEmployee() { 
     const navigate = useNavigate();

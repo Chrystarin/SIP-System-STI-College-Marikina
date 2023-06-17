@@ -10,7 +10,6 @@ import TestAuth from './Test/Auth';
 import TestStudent from './Test/Student';
 import TestSchoolYear from './Test/SchoolYear';
 import TestSIP from './Test/SIP';
-import TestProfile from './Test/Profile';
 
 import EmployeesList from './Pages/Employees/EmployeesList';
 import AddEmployee from './Pages/Employees/AddEmployee';
@@ -33,7 +32,6 @@ const App: React.FC = () => {
                 <Route path="/test/student" element={<TestStudent/>} />
                 <Route path="/test/schoolyear" element={<TestSchoolYear/>} />
                 <Route path="/test/sip" element={<TestSIP/>} />
-                <Route path="/test/profile" element={<TestProfile/>} />
             </Route>
 
             <Route element={<ProtectedRoute allowedRoles={['admin', 'moderator']}/>}>

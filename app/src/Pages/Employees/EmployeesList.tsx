@@ -60,18 +60,15 @@ function EmployeesList() {
             <h2 className='ContentLayout1__Title'>Employees</h2>
             <div className='ContentLayout1__Navigation'>
                 <Button variant={stepper==="Teachers"?"contained":"text"} onClick={()=>{setStepper("Teachers")}}>Teachers</Button>
-                { user.role === 'moderator' ? '' :
-                    <Button variant={stepper==="Moderators"?"contained":"text"} onClick={()=>{setStepper("Moderators")}}>Moderators</Button>
-                }
-                
+                <Button variant={stepper==="Moderators"?"contained":"text"} onClick={()=>{setStepper("Moderators")}}>Moderators</Button>
             </div>
             <div className='ContentLayout1__Tools'>
                 <div className='ContentLayout1__Extended'>
                     <SearchInput/>
                 </div>
-                { user.role === 'moderator' ? '' :
-                    <div><Button variant='contained' href='/employees/add'>Add Employee</Button></div>
-                }
+                { user.role === 'admin' 
+                    ? <div><Button variant='contained' href='/employees/add'>Add Employee</Button></div> 
+                :''}
                 
             </div>
             {stepper==="Moderators"?<>

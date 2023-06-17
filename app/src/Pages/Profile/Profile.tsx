@@ -5,6 +5,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import CaseTableView from '../../Components/CaseTableView/CaseTableView';
 import axios from './../../Utils/Axios';
 import { useParams } from 'react-router-dom';
+import {useAuth} from '../../Utils/AuthContext';
 
 function Profile() {
 
@@ -12,6 +13,7 @@ function Profile() {
     const [user, setUser] = useState<any>();
     const [sips, setSips] = useState<any>();
     const {id} = useParams();
+    const {isAuth} = useAuth();
 
     const fetchUser = async () => {
         try{
@@ -87,7 +89,11 @@ function Profile() {
                     </li>
                 }
                 </ul>
-                <Button className='Updatebutton' variant='contained' fullWidth> Update Profile</Button>
+
+                {isAuth((!id) ? ((JSON.parse(localStorage.getItem('user') || ''))?.employeeId) : id) ? 
+                    <Button className='Updatebutton' variant='contained' fullWidth> Update Profile</Button>
+                :''}
+            
             </div>
             </div>
         </div>

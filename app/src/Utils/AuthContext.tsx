@@ -6,12 +6,14 @@ interface AuthContextState {
     user: any;
     login: (email: string, password: string) => void;
     logout: () => void;
+    isAuth: (id: any) => boolean;
 }
 
 export const AuthContext = createContext<AuthContextState>({
     user: null,
     login: () => {},
     logout: () => {},
+    isAuth: () => false,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -43,6 +45,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         navigate("/");
     };
 
+    const isAuth = (id:any) => {
+		if (!user) {
+			// User is not logged in, so they are not authorized
+			return false;
+		}
+
+		if (user.employeeId !== id) {
+			// User is logged in, but they are not authorized
+			return false;
+		}
+
+		// User is logged in and authorized
+		return true;
+	};
+
     useEffect(() => {
         // Check if user is already logged in on first mount
         const loggedInUser = localStorage.getItem("user");
@@ -52,7 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, isAuth }}>
             {children}
         </AuthContext.Provider>
     );

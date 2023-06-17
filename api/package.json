@@ -6,7 +6,8 @@
 	"scripts": {
 		"build": "rimraf dist && tsc",
 		"start": "node dist/index.js",
-		"dev": "nodemon src/index.ts"
+		"dev": "nodemon src/index.ts",
+        "rimraf": "./node_modules/rimraf/bin.js"
 	},
 	"keywords": [],
 	"author": "",

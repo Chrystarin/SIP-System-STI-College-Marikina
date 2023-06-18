@@ -6,7 +6,6 @@ import ProtectedRoute from './Utils/ProtectedRoute';
 import Profile from './Pages/Profile/Profile';
 import LandingPage from './Pages/LandingPage/LandingPage';
 
-import TestAuth from './Test/Auth';
 import TestStudent from './Test/Student';
 import TestSchoolYear from './Test/SchoolYear';
 import TestSIP from './Test/SIP';
@@ -23,7 +22,6 @@ const App: React.FC = () => {
   return (
     <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/test/auth" element={<TestAuth/>} />
 
         <Route element={<ProtectedRoute allowedRoles={['admin', 'teacher', 'moderator']}/>}>
             <Route element={<Layout active={""}/>} >  

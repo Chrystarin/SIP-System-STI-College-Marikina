@@ -100,6 +100,7 @@ const SIP: React.FC<SIPProps> = (props) => {
     return (
         <div className=' ContentLayout1'>
             <form onSubmit={addCase}>
+                <div className=' ContentLayout1'>
                 <h2 className='ContentLayout1__Title'>Add Case</h2>
                 <TextField 
                     id="outlined-basic" 
@@ -153,6 +154,7 @@ const SIP: React.FC<SIPProps> = (props) => {
                 </FormControl>
                 <Button variant='contained' type='submit'>Submit</Button>
                 {/* <button onClick={()=>addCase()}>Add Case</button> */}
+                </div>
             </form>
             <hr/>
             <div>

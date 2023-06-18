@@ -3,15 +3,14 @@ import React, {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
-import axios from './../Utils/Axios';
+import axios from './../../Utils/Axios';
 
 interface StudentProps {
     // define your props here
   }
   
-  const Student: React.FC<StudentProps> = (props) => {
-    const [studentId, setStudentId] = useState('');
-    const [students, setStudents] = useState('');
+  const AddStudent: React.FC<StudentProps> = (props) => {
+
     const [studentForm, setStudentForm] = useState({
         studentId: '',
         firstName: '',
@@ -75,4 +74,4 @@ interface StudentProps {
     );
   };
 
-export default Student;
+export default AddStudent;

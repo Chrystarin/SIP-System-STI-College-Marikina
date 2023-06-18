@@ -97,6 +97,7 @@ function CaseTableView(props:any) {
                     </TableBody>
                 </Table>
         }
+        
         </TableContainer>
     )
 }

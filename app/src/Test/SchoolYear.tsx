@@ -76,5 +76,5 @@ const SchoolYear: React.FC<SchoolYearProps> = (props) => {
         </div>
     );
 };
-
+                   
 export default SchoolYear;

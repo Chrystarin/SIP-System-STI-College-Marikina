@@ -33,6 +33,9 @@ const Layout: React.FC<LayoutProps> = (props) => {
                         <SearchInput/>
                     </div>
                     <div>
+                        test
+                    </div>
+                    <div>
                         <div>
                             
                         </div>

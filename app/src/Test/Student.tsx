@@ -38,14 +38,12 @@ interface StudentProps {
     };
 
     return (
-        <div>
-            <div>
-                <h1>Add Student</h1>
-                Student Id: <input type="text" onChange={(e)=>setStudentForm({...studentForm, studentId:e.target.value})}/>
-                First Name: <input type="text" onChange={(e)=>setStudentForm({...studentForm, firstName:e.target.value})}/>
-                Last Name: <input type="text" onChange={(e)=>setStudentForm({...studentForm, lastName:e.target.value})}/>
-                <button onClick={addStudent}>Add Student</button>
-            </div>
+        <div className=' ContentLayout1'>
+            <h2 className='ContentLayout1__Title'>Add Student</h2>
+            Student Id: <input type="text" onChange={(e)=>setStudentForm({...studentForm, studentId:e.target.value})}/>
+            First Name: <input type="text" onChange={(e)=>setStudentForm({...studentForm, firstName:e.target.value})}/>
+            Last Name: <input type="text" onChange={(e)=>setStudentForm({...studentForm, lastName:e.target.value})}/>
+            <button onClick={addStudent}>Add Student</button>
         </div>
     );
   };

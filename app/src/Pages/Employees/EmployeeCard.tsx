@@ -8,8 +8,16 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import axios from './../../Utils/Axios';
+import SnackbarComponent from '../../Components/Snackbar/SnackbarComponent';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 function EmployeeCard(props:any) {
 
+    const [openSnackBar, setOpenSnackBar] = React.useState({
+        open:false,
+        type:"",
+        note:""
+    });
     const {
         name,
         id,
@@ -17,16 +25,20 @@ function EmployeeCard(props:any) {
         cases,
         status
     } = props
-
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    
+    const [anchorElMoreInfo, setAnchorElMoreInfo] = React.useState<null | HTMLElement>(null);
+    const openMoreInfo = Boolean(anchorElMoreInfo);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElMoreInfo(event.currentTarget);
     };
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElMoreInfo(null);
     };
 
+    const [openPassword, setOpenPassword] = React.useState(false);
+    const handleOpenPassword = () => setOpenPassword(true);
+    const handleClosePassword = () => setOpenPassword(false);
+    const [passwordVal, setPasswordVal] = React.useState();
     const resetPassword = async () => {
         try{
             await axios
@@ -35,12 +47,12 @@ function EmployeeCard(props:any) {
             })
             .then((response: any) => {
                 console.log(response.data);
-                alert("New password is: " + response.data.password);
+                setPasswordVal(response.data.password);
+                handleOpenPassword();
             });
         }
         catch (error: any){
             console.log(error);
-            alert(error.response.data.message);
         }
         handleClose();
     };
@@ -54,7 +66,13 @@ function EmployeeCard(props:any) {
             })
             .then((response: any) => {
                 console.log(response.data);
-                alert("This user has been set to " + (status === 'active' ? 'inactive' : 'active'));
+                setOpenSnackBar(openSnackBar => ({
+                    ...openSnackBar,
+                    open:true,
+                    type:'success',
+                    note: "This user has been set to " + (status === 'active' ? 'inactive' : 'active'),
+                }));
+                
             });
         }
         catch (error: any){
@@ -65,7 +83,7 @@ function EmployeeCard(props:any) {
     };
 
     return (
-        <div className='paper employeeCard active'>
+        <div className={status === 'active'?"paper employeeCard active":"paper employeeCard"} >
             <div className='employeeCard__HeaderContainer'>
                 { status === 'active'
                     ? <h6 className='BodyText1 Status'>Active</h6>
@@ -77,8 +95,8 @@ function EmployeeCard(props:any) {
                 </IconButton>
                 <Menu
                     id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
+                    anchorEl={anchorElMoreInfo}
+                    open={openMoreInfo}
                     onClose={handleClose}
                     MenuListProps={{
                     'aria-labelledby': 'basic-button',
@@ -97,26 +115,31 @@ function EmployeeCard(props:any) {
                     <p>ID:{id}</p>
                 </div>
                 <div className='employeeCard__Footer'>
-                    {/* <div className='Footer__Info'>
-                        <div>
-                            <BusinessCenterIcon/>
-                            <h6 className='BodyText1'>Case Closed</h6>
-                        </div>
-                        <p>{cases?.length}</p>
-                    </div> */}
-                    {/* <div className='Footer__Info'>
-                        <div>
-                            <CalendarMonthIcon/>
-                            <h6 className='BodyText1 '>Registered On</h6>
-                        </div>
-                    </div>
-                    <div className='Footer__Info'>
-                        <p>{registerDate}</p>
-                    </div> */}
+                    
                 </div>
             </a>
-            
-        </div>
+        <SnackbarComponent open={openSnackBar} setter={setOpenSnackBar}/>
+        <Modal
+            open={openPassword}
+            onClose={handleClosePassword}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <div className='paper PasswordModal'>
+                <div>
+                    <h5>Password Reset</h5>
+                </div>
+                <div className='PasswordModal__Body'>
+                    <h3>{passwordVal}</h3>
+                    <p className='BodyText1'>NEW PASSWORD</p>
+                </div>
+                <div className='PasswordModal__Buttons'>
+                    <Button variant='text' onClick={handleClosePassword}>Close</Button>
+                    <Button variant='contained'>Copy</Button>
+                </div>
+            </div>
+        </Modal>
+    </div>
   )
 }
 

@@ -42,7 +42,6 @@ function Profile() {
             .get(`/sips`, {
                 params:{
                     employeeId: (!id) ? ((JSON.parse(localStorage.getItem('user') || ''))?.employeeId) : id
-                    // employeeId: 'EMP001'
                 }
             })
             .then((response: any) => {
@@ -100,22 +99,6 @@ function Profile() {
             </div>
         </div>
         <div className='Profile__Content'>
-            <div className='ContentNavigation'>
-            <div className='paper ContentNavigation__Container active'>
-                <div className='ContentNavigation__Information'>
-                <h6>SIP Total</h6>
-                <h1>
-                    {sips.length}
-                </h1>
-                </div>
-                <div className='ContentNavigation__Footer' onClick={()=>{setStepper(1)}}>
-                <p>View List</p>
-                <NavigateNextIcon/>
-
-                </div>
-            </div>
-
-            </div>
             <div className=' ContentNavigation__Table'>
                 <CaseTableView cases={sips}/>
             </div>

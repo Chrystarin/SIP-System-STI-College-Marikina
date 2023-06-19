@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { Outlet } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import SideNavigation from './SideNavigation';
@@ -12,6 +12,10 @@ import { useAuth } from './../Utils/AuthContext';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+
+
+import axios from './../Utils/Axios';
+
 interface LayoutProps {
     // define your props here
     active :string
@@ -34,6 +38,70 @@ const Layout: React.FC<LayoutProps> = (props) => {
     };
     const { logout } = useAuth();
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : '';
+    
+    const [schoolYear, setSchoolYear] = useState<any>()
+
+    const fetchActiveYear = async () => {
+        try{
+            await axios
+            .get(`/schoolyears`, {
+                params:{
+                    active: true
+                }
+            })
+            .then((response: any) => {
+                console.log(response);
+                setSchoolYear(response.data)
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            setSchoolYear("None")
+        }
+    };
+
+    const startSchoolYear = async () => {
+        console.log((new Date()).getTime())
+        try{
+            await axios
+            .post(`/schoolyears`, {
+                start: (new Date()).getTime()
+            })
+            .then((response: any) => {
+                console.log(response);
+                alert(response.data.message);
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.response.data.message);
+        }
+    };
+
+    const endSchoolYear = async () => {
+        try{
+            await axios
+            .patch(`/schoolyears`)
+            .then((response: any) => {
+                console.log(response);
+                alert(response.data.message);
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.response.data.message);
+        }
+    };
+
+    useEffect (() => {
+        if (schoolYear === "None") {
+            console.log("EMPTY")
+        }
+        else {
+            fetchActiveYear();
+        }
+    }, [schoolYear]);
+    
     return (
         <div className='Layout'>
             <SideNavigation Active={props.active}/>
@@ -59,9 +127,15 @@ const Layout: React.FC<LayoutProps> = (props) => {
                                     <h4>2022-2023</h4>
                                     <p>Active</p> 
                                 </div>
-                                <div>
-                                    <Button  variant='contained' onClick={handleCloseYearNTerm}>End</Button>
-                                </div>
+                                {schoolYear==="None" ? 
+                                    <div>
+                                        <Button  variant='contained' onClick={() => startSchoolYear()}>Start</Button>
+                                    </div>
+                                :
+                                    <div>
+                                        <Button  variant='contained' onClick={() => endSchoolYear()}>Start</Button>
+                                    </div>
+                                }
                             </div>
                         </Modal>
                     </div>

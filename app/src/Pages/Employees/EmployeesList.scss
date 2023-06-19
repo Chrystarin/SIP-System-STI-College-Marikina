@@ -2,6 +2,7 @@
     position: relative; 
     width: 260px;
     padding-top: 55px;
+    opacity: .7;
     a{
         padding: 1em;
         display: block;
@@ -89,6 +90,7 @@
     background-color: rgb(243, 243, 243);
 }
 .active{
+    opacity: 1;
     .employeeCard__HeaderContainer{
         .Status{
             color: #05AD75;
@@ -96,5 +98,38 @@
         .Status::before{
             background-color: #05AD75;
         }
+    }
+}
+.PasswordModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 300px;
+    overflow: hidden;
+    h5{
+        background-color: var(--primary);
+        padding: 1em;
+        color: white;
+    }
+    .PasswordModal__Body{
+        padding: 2em 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        h3{
+            color: var(--primary);
+        }
+        p{
+            color: var(--secondary);
+        }
+    }
+    .PasswordModal__Buttons{
+        padding: 0 1em 1em 1em;
+        gap: 10px;
+        display: grid;
+        grid-template-columns: .5fr 1fr;
+
     }
 }

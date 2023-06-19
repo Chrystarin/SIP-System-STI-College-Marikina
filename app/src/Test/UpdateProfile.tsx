@@ -49,5 +49,5 @@ const UpdateProfile: React.FC<UpdateProfileProps> = (props) => {
         </div>
     );
 };
-                   
+
 export default UpdateProfile;

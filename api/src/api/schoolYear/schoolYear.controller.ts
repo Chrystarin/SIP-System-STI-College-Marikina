@@ -20,7 +20,7 @@ export const getSchoolYears: RequestHandler = async (req, res) => {
         modelQuery[prop] = new Date(year).getFullYear();
     }
 
-    if(active !== undefined) modelQuery.end = { $exists: active };
+    if(active !== undefined) modelQuery.end = { $exists: !active };
 
     const schoolYears: Array<SchoolYearPopulatedDocument> | null = await SchoolYearModel.find(modelQuery).populate({ path: 'admin', select: 'employeeId role name' }).exec();
 

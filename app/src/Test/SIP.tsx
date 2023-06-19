@@ -51,7 +51,7 @@ const SIP: React.FC<SIPProps> = (props) => {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 
@@ -75,7 +75,7 @@ const SIP: React.FC<SIPProps> = (props) => {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 
@@ -93,7 +93,7 @@ const SIP: React.FC<SIPProps> = (props) => {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 

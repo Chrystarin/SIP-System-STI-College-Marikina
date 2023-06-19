@@ -21,7 +21,7 @@ const SchoolYear: React.FC<SchoolYearProps> = (props) => {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 
@@ -36,7 +36,7 @@ const SchoolYear: React.FC<SchoolYearProps> = (props) => {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 
@@ -55,7 +55,7 @@ const SchoolYear: React.FC<SchoolYearProps> = (props) => {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 

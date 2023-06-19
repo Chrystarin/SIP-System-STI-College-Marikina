@@ -40,7 +40,7 @@ function EmployeeCard(props:any) {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
         handleClose();
     };
@@ -59,7 +59,7 @@ function EmployeeCard(props:any) {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
         handleClose();
     };

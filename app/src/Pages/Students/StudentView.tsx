@@ -36,7 +36,7 @@ function StudentView() {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     }
 
@@ -59,7 +59,7 @@ function StudentView() {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 

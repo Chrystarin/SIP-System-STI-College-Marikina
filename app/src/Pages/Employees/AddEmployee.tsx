@@ -44,7 +44,7 @@ function AddEmployee() {
         }
         catch (error: any){
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
 
@@ -98,7 +98,7 @@ function AddEmployee() {
                         id="outlined-basic" 
                         label="ID No." 
                         variant="outlined" 
-                        type='text' 
+                        type='text'
                         required
                         onChange={(e)=>setRegisterForm({...registerForm, employeeId:e.target.value})}
                     />

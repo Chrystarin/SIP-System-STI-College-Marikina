@@ -14,6 +14,7 @@ function AddStudent(props:StudentProps){
 const [studentForm, setStudentForm] = useState({
     studentId: '',
     firstName: '',
+    middleName: '',
     lastName: '',
 });
 
@@ -26,6 +27,7 @@ const addStudent = async (e:any) => {
             studentId : studentForm.studentId,
             name : {
                 first : studentForm.firstName,
+                middle : studentForm.middleName,
                 last : studentForm.lastName
             }
         })
@@ -36,7 +38,7 @@ const addStudent = async (e:any) => {
     }
     catch (error: any){
         console.log(error);
-        alert(error.message);
+        alert(error.response.data.message);
     }
 };
 
@@ -58,6 +60,14 @@ return (
                     required
                     fullWidth
                     onChange={(e)=>setStudentForm({...studentForm, firstName:e.target.value})}
+                />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Middle Name" 
+                    variant="outlined"
+                    required
+                    fullWidth
+                    onChange={(e)=>setStudentForm({...studentForm, middleName:e.target.value})}
                 />
                 <TextField 
                     id="outlined-basic" 

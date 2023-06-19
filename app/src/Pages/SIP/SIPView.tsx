@@ -18,7 +18,6 @@ import axios from '../../Utils/Axios';
 function AddCase() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [stepper,setStepper] = useState<any>(3);
     const [sip, setSip] = useState<any>();
 
     const fetchSip = async () => {
@@ -49,14 +48,13 @@ function AddCase() {
     return (
         <form className='FormTemplate'>
             <h4 className='Form__Title'>SIP VIEW</h4>
-            {stepper===3?<>
+            
                 <div className='Form__Section SIP'>
                     <SIPForm sip={sip}/>
                 </div>
                 <div className='Button__Container'>
                     <Button variant='contained' onClick={()=>{ navigate("/cases")}}>Go To Cases</Button>
                 </div>
-            </>:""}
         </form>
     )
 }

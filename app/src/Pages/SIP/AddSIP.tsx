@@ -325,13 +325,13 @@ function AddCase() {
                                     <MenuItem value={'Tertiary - Summer'}>Tertiary - Summer</MenuItem>
                                 </Select>
                             </FormControl>
-                                <Button variant='contained' onClick={()=>SubmitCase()}>Submit</Button>
+                                {/* <Button variant='contained' onClick={()=>SubmitCase()}>Submit</Button> */}
                             </div>
                     </div>
                 </div>
                 <div className='Button__Container'>
-                    <Button variant='text'>Back</Button>
-                    <Button variant='contained' onClick={()=> {}}>Submit</Button>
+                    <Button variant='text' onClick={()=>setStepper(1)}>Back</Button>
+                    <Button variant='contained' onClick={()=>SubmitCase()}>Submit</Button>
                 </div>
             </>:""}
             

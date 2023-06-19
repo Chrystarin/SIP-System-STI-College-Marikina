@@ -39,6 +39,25 @@ function AddCase() {
         }
     };
 
+    const updateStatus = async (status:any) => {
+        try{
+            await axios
+            .patch(`/sips`, {
+                sipId: sip.sipId,
+                status: status
+            })
+            .then((response: any) => {
+                console.log(response);
+                alert(response.data.message);
+                navigate('/sip');
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.message);
+        }
+    };
+
     useEffect(() => {
         fetchSip();
     }, [])
@@ -48,12 +67,21 @@ function AddCase() {
     return (
         <form className='FormTemplate'>
             <h4 className='Form__Title'>SIP VIEW</h4>
-            
                 <div className='Form__Section SIP'>
                     <SIPForm sip={sip}/>
                 </div>
                 <div className='Button__Container'>
-                    <Button variant='contained' onClick={()=>{ navigate("/cases")}}>Go To Cases</Button>
+                    <Button variant='contained' onClick={()=>{}}>Download</Button>
+                    {sip.status==='pending' 
+                        ? 
+                            <>
+                                <Button variant='contained' onClick={()=>{updateStatus('resolved')}}>Resolved</Button>
+                                <Button variant='contained' onClick={()=>{updateStatus('no response')}}>No Response</Button>
+                            </>
+                        :
+                            ''
+                    }
+                    
                 </div>
         </form>
     )

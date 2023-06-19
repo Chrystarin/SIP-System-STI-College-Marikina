@@ -102,6 +102,9 @@ export const updateStatus: RequestHandler = async (req: Request<{}, {}, SIP>, re
 export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res) => {
     const { studentId, sipCase, term } = req.body;
 
+    console.log(studentId);
+    console.log(req.body);
+
     if (req.user === undefined) throw new Unauthorized('Login first');
     const user: UserDocument = req.user;
 

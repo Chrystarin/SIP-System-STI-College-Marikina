@@ -66,59 +66,59 @@ function SIPForm(props: any) {
                 <h6>DETAILS OF CONSULTATION</h6>
                 <div>
                     {(!sip.cases.ETA.length) ? "" : 
-                            <p>
-                                Excessive Tardiness / Absences {"["} Issued by:{" "} 
-                                    {Array.isArray(sip.cases.ETA) && sip.cases.ETA.length > 0 && sip.cases.ETA.map((data: any) => {
-                                        return (
-                                            <> | {data.issuer.name.first} {data.issuer.name.last} </>
-                                        );
-                                    })}
-                                {"]"}
-                            </p>
+                        <p>
+                            Excessive Tardiness / Absences {"["} Issued by:{" "} 
+                                {Array.isArray(sip.cases.ETA) && sip.cases.ETA.length > 0 && sip.cases.ETA.map((data: any) => {
+                                    return (
+                                        <> | {data.issuer.name.first} {data.issuer.name.last} </>
+                                    );
+                                })}
+                            {"]"}
+                        </p>
                     }
                     {(!sip.cases.DCP.length) ? "" : 
-                            <p>
-                                Declining Class Performance {"["} Issued by:{" "} 
-                                    {Array.isArray(sip.cases.DCP) && sip.cases.DCP.length > 0 && sip.cases.DCP.map((data: any) => {
-                                        return (
-                                            <> | {data.issuer.name.first} {data.issuer.name.last} </>
-                                        );
-                                    })}
-                                {"]"}
-                            </p>
+                        <p>
+                            Declining Class Performance {"["} Issued by:{" "} 
+                                {Array.isArray(sip.cases.DCP) && sip.cases.DCP.length > 0 && sip.cases.DCP.map((data: any) => {
+                                    return (
+                                        <> | {data.issuer.name.first} {data.issuer.name.last} </>
+                                    );
+                                })}
+                            {"]"}
+                        </p>
                     }
                     {(!sip.cases.UoaS.length) ? "" : 
-                            <p>
-                                Unbecoming of an STIer {"["} Issued by:{" "} 
-                                    {Array.isArray(sip.cases.UoaS) && sip.cases.UoaS.length > 0 && sip.cases.UoaS.map((data: any) => {
-                                        return (
-                                            <> | {data.issuer.name.first} {data.issuer.name.last} </>
-                                        );
-                                    })}
-                                {"]"}
-                            </p>
+                        <p>
+                            Unbecoming of an STIer {"["} Issued by:{" "} 
+                                {Array.isArray(sip.cases.UoaS) && sip.cases.UoaS.length > 0 && sip.cases.UoaS.map((data: any) => {
+                                    return (
+                                        <> | {data.issuer.name.first} {data.issuer.name.last} </>
+                                    );
+                                })}
+                            {"]"}
+                        </p>
                     }
                     {(!sip.cases.AEC.length) ? "" : 
-                            <p>
-                                Assessment/Exam Concern {"["} Issued by:{" "} 
-                                    {Array.isArray(sip.cases.AEC) && sip.cases.AEC.length > 0 && sip.cases.AEC.map((data: any) => {
-                                        return (
-                                            <> | {data.issuer.name.first} {data.issuer.name.last} </>
-                                        );
-                                    })}
-                                {"]"}
-                            </p>
+                        <p>
+                            Assessment/Exam Concern {"["} Issued by:{" "} 
+                                {Array.isArray(sip.cases.AEC) && sip.cases.AEC.length > 0 && sip.cases.AEC.map((data: any) => {
+                                    return (
+                                        <> | {data.issuer.name.first} {data.issuer.name.last} </>
+                                    );
+                                })}
+                            {"]"}
+                        </p>
                     }
                     {(!sip.cases.LD.length) ? "" : 
-                            <p>
-                                Learning Difficulty {"["} Issued by:{" "} 
-                                    {Array.isArray(sip.cases.LD) && sip.cases.LD.length > 0 && sip.cases.LD.map((data: any) => {
-                                        return (
-                                            <> | {data.issuer.name.first} {data.issuer.name.last} </>
-                                        );
-                                    })}
-                                {"]"}
-                            </p>
+                        <p>
+                            Learning Difficulty {"["} Issued by:{" "} 
+                                {Array.isArray(sip.cases.LD) && sip.cases.LD.length > 0 && sip.cases.LD.map((data: any) => {
+                                    return (
+                                        <> | {data.issuer.name.first} {data.issuer.name.last} </>
+                                    );
+                                })}
+                            {"]"}
+                        </p>
                     }
                 </div>
                 <h6>ACTION TAKEN</h6>

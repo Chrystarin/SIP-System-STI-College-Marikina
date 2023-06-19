@@ -17,6 +17,7 @@ import AddStudent from '../../Components/AddStudent/AddStudent';
 import axios from '../../Utils/Axios';
 
 function AddCase() {
+
     const navigate = useNavigate();
     const [stepper,setStepper] = useState<any>(1);
     const [student, setStudent] = useState<any>();
@@ -33,6 +34,15 @@ function AddCase() {
         term:"",
         semester:""
     });
+
+    const [studentForm, setStudentForm] = useState({
+        studentId: '',
+        firstName: '',
+        lastName: '',
+    });
+    
+    
+    
 
     const fetchStudents = async () => {
         try{
@@ -90,17 +100,47 @@ function AddCase() {
         }
     };
 
-    async function SubmitCase(e:any){
+    async function SubmitCase(){
+        // e.preventDefault();
         try{
             await axios
             .post(`/sips`, {
-                studentId: form.studentId,
+                studentId: student.studentId,
                 sipCase: form.sipCase,
                 term: form.term
             })
             .then((response: any) => {
                 console.log(response);
                 alert(response.data.message);
+                navigate("/sip")
+            });
+        }
+        catch (error: any){
+            console.log(error);
+            alert(error.message);
+        }
+    };
+
+    const SubmitStudent = async () => {
+        try{
+            await axios
+            .post(`/students`,{
+                studentId : studentForm.studentId,
+                name : {
+                    first : studentForm.firstName,
+                    last : studentForm.lastName
+                }
+            })
+            .then(async (response: any) => {
+                console.log(response);
+                alert(response.data.message);
+                setForm({
+                    studentId: studentForm.studentId,
+                    sipCase: '',
+                    term: ''
+                })
+                await fetchStudent(studentForm.studentId);
+                setStepper(2);
             });
         }
         catch (error: any){
@@ -132,24 +172,6 @@ function AddCase() {
                             <p>Can't find? </p> <h6 onClick={()=> setStepper(1.1)}>Add new Student.</h6>
                         </div>
                     </div>
-                    {/* <div className='FindStudent__Results'>
-                        <CaseTableView students={students}/>
-                    </div> */}
-
-                    {/* <div className='FindStudent__Results'>
-                        {Array.isArray(students) && students.length > 0 && students.map((student: any) => {
-                            return (
-                                <div
-                                    style={{border: '1px solid', cursor: 'pointer', margin: '5px', padding: '5px'}}
-                                    key={student.studentId}
-                                    onClick={() => {fetchStudent(student.studentId)}}
-                                >
-                                    <p>{student.studentId}</p>
-                                    <p>{student.name.first} {student.name.last}</p>
-                                </div>
-                            );
-                        })}
-                    </div> */}
                     <div className='FindStudent__Results'>
                         <StudentTableView students={students} fetchStudent={fetchStudent}/>
                     </div>
@@ -158,24 +180,47 @@ function AddCase() {
             {stepper===1.1?<>
                 <div className='Form__Section'>
                     <h6 className='Section__Title'>Find Student</h6>
-                    <AddStudent setStepper={setStepper}/>
+                        <div className='wrapperForm_3'>
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Student ID" 
+                                variant="outlined"
+                                required
+                                fullWidth
+                                onChange={(e)=>setStudentForm({...studentForm, studentId:e.target.value})}
+                            />
+                            <TextField 
+                                id="outlined-basic" 
+                                label="First Name" 
+                                variant="outlined"
+                                required
+                                fullWidth
+                                onChange={(e)=>setStudentForm({...studentForm, firstName:e.target.value})}
+                            />
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Last Name" 
+                                variant="outlined"
+                                required
+                                fullWidth
+                                onChange={(e)=>setStudentForm({...studentForm, lastName:e.target.value})}
+                            />
+                        </div>
+                        <div className='Button__Container'>
+                            <Button variant='text' onClick={()=>setStepper(1)}>Cancel</Button>
+                            <Button variant='contained' onClick={()=>SubmitStudent()}>Add Student</Button>
+                        </div>
                 </div>
-                {/* <div className='FindStudent'>
-                    <div className='FindStudentFooter'>
-                        <p>Student already exists? </p> <h6 onClick={()=> setStepper(1)}>Find student here.</h6>
-                    </div>
-                </div> */}
-                {/* <AddStudent setStepper={setStepper} fetchStudent={fetchStudent}/> */}
-                {/* <AddStudent/> */}
+
             </>:""}
             {stepper===2?<>
                 <div className='Form__Section '>
-                    <h6 className='Section__Title'>STUDENT INTERVENTION FORM</h6>
-                    {/* <SIPPreview/> */}
+                    <h6 className='Section__Title'>STUDENT INFORMATION</h6>
+                    <SIPPreview student={student}/>
                 </div>
                 <div className='Form__Section '>
-                    <h6 className='Section__Title'>STUDENT CASES</h6>
-                    <p className='Form__SubTitle'>2 Active Cases</p>
+                    <h6 className='Section__Title'>ADD CASE</h6>
+                    {/* <p className='Form__SubTitle'>2 Active Cases</p> */}
                     {/* <StudentCases/> */}
                     <div className='AddCase'>
                         {/* <FormControl fullWidth sx={{  minWidth: 200 }}>
@@ -237,19 +282,7 @@ function AddCase() {
                         </FormControl>
                         <Button variant="contained">Add</Button> */}
                         
-                        <form onSubmit={SubmitCase}>
                             <div className=' ContentLayout1'>
-                            <p>{JSON.stringify(student)}</p>
-                            <h2 className='ContentLayout1__Title'>Add Case</h2>
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Student ID" 
-                                variant="outlined"
-                                required
-                                value={student?.studentId}
-                                fullWidth
-                                disabled
-                            />
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Case</InputLabel>
                                 <Select
@@ -292,15 +325,13 @@ function AddCase() {
                                     <MenuItem value={'Tertiary - Summer'}>Tertiary - Summer</MenuItem>
                                 </Select>
                             </FormControl>
-                                <Button variant='contained' type='submit'>Submit</Button>
-                                {/* <button onClick={()=>addCase()}>Add Case</button> */}
+                                <Button variant='contained' onClick={()=>SubmitCase()}>Submit</Button>
                             </div>
-                        </form>
                     </div>
                 </div>
                 <div className='Button__Container'>
                     <Button variant='text'>Back</Button>
-                    <Button variant='contained' onClick={()=> {fetchSip(student.studentId);setStepper(3)}}>Submit</Button>
+                    <Button variant='contained' onClick={()=> {}}>Submit</Button>
                 </div>
             </>:""}
             

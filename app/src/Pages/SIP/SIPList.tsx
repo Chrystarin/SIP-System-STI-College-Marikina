@@ -1,8 +1,8 @@
 import React,{useState , useEffect} from 'react'
 import Button from '@mui/material/Button/Button';
 import SearchInput from '../../Components/SearchInput/SearchInput';
-import CaseTableView from '../../Components/CaseTableView/CaseTableView';
-import axios from './../../Utils/Axios';
+import CaseTableView from '../../Components/TableView/CaseTableView';
+import axios from '../../Utils/Axios';
 
 function CasesList() {
   const [stepper,setStepper] = useState("Active");
@@ -92,7 +92,7 @@ function CasesList() {
                 <div className='ContentLayout1__Extended'>
                     <SearchInput/>
                 </div>
-                <div><Button variant='contained' href='/case/add'>Add Case</Button></div>
+                <div><Button variant='contained' href='/sip/add'>Add Case</Button></div>
             </div>
             {stepper==="Active"?<>
               <CaseTableView

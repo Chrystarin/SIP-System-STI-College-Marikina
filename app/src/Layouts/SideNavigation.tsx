@@ -23,10 +23,9 @@ const SideNavigation = (props:SideNavigationProps)=> {
                             <p>Employees</p>
                         </a>
                     </li>
-                }
-                
+                } 
                 <li>
-                    <a href="/cases" className={props.Active==="Cases"?"active":""}>
+                    <a href="/sip" className={props.Active==="Cases"?"active":""}>
                         <WorkIcon/>  
                         <p>SIPs</p>
                     </a>

@@ -6,7 +6,7 @@ function StudentCases(props:any) {
 
     return (
         <div className='SIP__Preview'>
-            {(!cases.AEC.length) ? "" : 
+            {(!cases.ETA.length) ? "" : 
                 <div className='StudentCase'>
                     <h6>Excessive Tardiness / Absences</h6>
                     <table>
@@ -15,7 +15,7 @@ function StudentCases(props:any) {
                             <th><p>Date Issued</p> </th>
                             <th><p>Term</p> </th>
                         </tr>
-                        {Array.isArray(cases.AEC) && cases.AEC.length > 0 && cases.AEC.map((data: any) => {
+                        {Array.isArray(cases.ETA) && cases.ETA.length > 0 && cases.ETA.map((data: any) => {
                             return (
                                 <tr>
                                     <td className='TDName'>

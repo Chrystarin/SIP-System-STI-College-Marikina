@@ -1,0 +1,144 @@
+.SIPForm{
+    width: 	8.3in;
+    height: 11.7in;
+    border: 1px solid gray;
+    padding: 2em 1em;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .SIPForm__Title{
+        font-size: 1.7em;
+        color: var(--primary);
+        text-align: center;
+    }
+    .Underline{
+        min-height: 1.2em;
+        flex-grow: 1;
+        padding: 0 5px 1px;
+        border-bottom: 1px solid black;
+    }
+    .SIPValue{
+        flex-grow: 0;
+    }
+    h6{
+        font-size: 1.2em;
+        color: var(--secondary);
+    }
+    h6::after{
+        content: ":";
+    }
+    p{
+        font-size: 1.2em; 
+        color: var(--secondary);
+    }
+    .SIPForm__Header{
+        .SIPForm__ROLE{
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+            h6{
+                position: relative;
+            }
+            h6::before{
+                content: "";
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                border-radius: 2px;
+                left: -20px;
+                width: 10px;
+                height: 10px;
+                border: 2px solid var(--secondary);
+                
+            }
+        }
+        .SIPForm__Information{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgb(230, 230, 230);
+            .wrapper__WValue{
+                display:flex;
+                align-items: center;
+                gap: 5px;
+            }
+            .wrapper__TITLE1{
+                display: grid;
+                grid-template-columns: 1fr .5fr .5fr;
+                gap: 10px;
+            }
+            .wrapper__TITLE2{
+                display: grid;
+                grid-template-columns: .5fr .7fr .8fr ;
+                gap: 10px;
+            }
+        }
+        
+    }
+    .SIPForm__Body{
+        flex-grow: 1;
+        .SIPForm__Purpose{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            div{
+                border: 1px solid gray;
+            }
+            div:nth-child(2){
+                height: 140px;
+            }
+            div:nth-child(4){
+                height: 180px;
+            }
+            div:nth-child(6){
+                height: 110px;
+            }
+            div:nth-child(8){
+                height:  110px;
+            }
+        }
+        .SIPForm__Signature{
+            padding-top: 45px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgb(230, 230, 230);
+            h6{
+                border-top: 2px solid gray;
+                text-align: center;
+                padding-top: 10px;
+            }
+        }
+    }
+    .SIPForm__Footer{
+        display: grid;
+        grid-template-columns: 1fr .8fr 1fr .8fr;
+        gap: 10px;
+        div{
+
+            h6{
+                margin-bottom: 25px;
+            }
+
+            p,span{
+                text-align: center;
+            }
+            p{
+                margin: 10px 0 10px;
+                padding-bottom: 5px;
+                border-bottom: 2px solid gray;
+            }
+            span{
+                font-size: 1.2em;
+                font-weight: 600;
+                display: block;
+            }
+        }
+    }
+}

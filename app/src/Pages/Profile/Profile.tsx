@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import CaseTableView from '../../Components/CaseTableView/CaseTableView';
+import CaseTableView from '../../Components/TableView/CaseTableView';
 import axios from './../../Utils/Axios';
 import { useParams } from 'react-router-dom';
 import {useAuth} from '../../Utils/AuthContext';

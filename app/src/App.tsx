@@ -6,14 +6,16 @@ import ProtectedRoute from './Utils/ProtectedRoute';
 import Profile from './Pages/Profile/Profile';
 import LandingPage from './Pages/LandingPage/LandingPage';
 
-import TestStudent from './Test/Student';
+// import TestStudent from './Test/Student';
+import TestStudent from './Components/AddStudent/AddStudent';
 import TestSchoolYear from './Test/SchoolYear';
 import TestSIP from './Test/SIP';
 
+import SIPView from './Pages/SIP/SIPView'
 import EmployeesList from './Pages/Employees/EmployeesList';
 import AddEmployee from './Pages/Employees/AddEmployee';
-import CasesList from './Pages/Cases/CasesList';
-import AddCase from './Pages/Cases/AddCase';
+import SIPList from './Pages/SIP/SIPList';
+import AddCase from './Pages/SIP/AddSIP';
 import StudentList from './Pages/Students/StudentList';
 import Layout from './Layouts/Layout';
 import StudentView from './Pages/Students/StudentView';
@@ -27,7 +29,7 @@ const App: React.FC = () => {
             <Route element={<Layout active={""}/>} >  
                 <Route path="/profile" element={<Profile />} />
                 
-                <Route path="/test/student" element={<TestStudent/>} />
+                <Route path="/test/student" element={<TestStudent setStepper={()=>{}}/>} />
                 <Route path="/test/schoolyear" element={<TestSchoolYear/>} />
                 <Route path="/test/sip" element={<TestSIP/>} />
             </Route>
@@ -43,8 +45,10 @@ const App: React.FC = () => {
             </Route>
             
             <Route element={<Layout active={"Cases"}/>} >
-                <Route path="/cases" element={<CasesList/>} />
-                <Route path="/case/add" element={<AddCase/>} />
+                <Route path="/sip" element={<SIPList/>} />
+                <Route path="/sip/add" element={<AddCase/>}/>
+                <Route path="/sip/:id" element={<SIPView/>} />
+                
             </Route>
 
             <Route element={<Layout active={"Students"}/>} >

@@ -132,7 +132,7 @@ p{
                     padding: 15px 0 15px 10px;
                     gap: 5px;
                     color: var(--secondary);
-
+                    transition: all .4s ease-in-out;
                 }
                 
                 p{
@@ -200,6 +200,28 @@ p{
                 display: flex;
                 align-items: center;
             }
+            .SchoolYear{
+                opacity: .9;
+                display: flex;
+                align-items: center;
+                margin-right: 25px;
+                padding: 0 .5em 0 1em ;
+                border-radius: 20px;
+                gap: 5px;
+                background-color: var(--primary);
+                color: white;
+                transition: all .3s ease-in-out;
+                p{
+                    color: white;
+                }
+                svg{
+                    color: white;
+                }
+            }
+          
+            .SchoolYearNTerm:hover{
+                opacity: 1;
+            }
             .ProfileDropdownButton{
                 height: 40px;
                 width: 40px;
@@ -224,6 +246,44 @@ p{
                     flex-grow: 1;
                 }
             }
+        }
+    }
+}
+.SchoolYearModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30%;
+    text-align: center;
+    padding: 2em 0 1em;
+    .SchoolYearModal__Title{
+        color: var(--primary);
+    }
+    .SchoolYearModal__Container{
+        margin: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h4{
+            color: var(--secondary);
+        }
+        p{
+            margin: 5px 0 0 10px;
+            color:#05AD75;
+            position: relative;
+        }
+        p:after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            transform: translateY(-50%);
+
+            border-radius: 20px;
+            width: 10px;
+            background-color: #05AD75;
+            height: 10px;
         }
     }
 }
@@ -407,6 +467,11 @@ p{
             grid-template-columns: 1fr 1fr 1fr;
             gap: 25px;
         }
+        // .wrapperForm_4_Button{
+        //     display: grid;
+        //     grid-template-columns: 1fr 1fr 1fr .8fr;
+        //     gap: 25px;
+        // }
     }
     .Button__Container{
         width: 100%;

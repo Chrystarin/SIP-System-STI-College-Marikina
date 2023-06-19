@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import Button from '@mui/material/Button/Button';
 import SearchInput from '../../Components/SearchInput/SearchInput';
-import CaseTableView from '../../Components/CaseTableView/CaseTableView';
+import CaseTableView from '../../Components/TableView/CaseTableView';
 import axios from './../../Utils/Axios';
 import { useNavigate } from 'react-router-dom';
 

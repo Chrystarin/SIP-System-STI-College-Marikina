@@ -1,8 +1,8 @@
 import React,{useEffect, useState} from 'react';
 import './AddCase.scss'
-
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import CaseTableView from '../../Components/CaseTableView/CaseTableView';
+import CaseTableView from '../../Components/TableView/CaseTableView';
 import SearchInput from '../../Components/SearchInput/SearchInput';
 import SIPPreview from '../../Components/SIPPreview/SIPPreview';
 import StudentCases from '../../Components/SIPPreview/StudentCases';
@@ -10,13 +10,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import SIPForm from '../../Components/SIPPreview/SIPForm';
 import { Button } from '@mui/material';
-
+import StudentTableView from '../../Components/TableView/StudentTableView';
 import AddStudent from '../../Components/AddStudent/AddStudent';
-import axios from './../../Utils/Axios';
+import axios from '../../Utils/Axios';
 
 function AddCase() {
-    const [stepper,setStepper] = useState(1);
+    const navigate = useNavigate();
+    const [stepper,setStepper] = useState<any>(1);
     const [student, setStudent] = useState<any>();
     const [students, setStudents] = useState([]);
     const [sip, setSip] = useState<any>();
@@ -119,8 +121,8 @@ function AddCase() {
             <div className='Form__Stepper'>
                 <button className={stepper === 1 || stepper === 1.1? "active":""}>Find Student</button>
                 <button className={stepper === 2? "active":""}>Add Case</button>
-                <button className={stepper === 3? "active":""}>SIP Form</button>
             </div>
+
             {stepper===1?<>
                 <div className='Form__Section'>
                     <h6 className='Section__Title'>Find Student</h6>
@@ -133,7 +135,8 @@ function AddCase() {
                     {/* <div className='FindStudent__Results'>
                         <CaseTableView students={students}/>
                     </div> */}
-                    <div className='FindStudent__Results'>
+
+                    {/* <div className='FindStudent__Results'>
                         {Array.isArray(students) && students.length > 0 && students.map((student: any) => {
                             return (
                                 <div
@@ -146,17 +149,24 @@ function AddCase() {
                                 </div>
                             );
                         })}
+                    </div> */}
+                    <div className='FindStudent__Results'>
+                        <StudentTableView students={students} fetchStudent={fetchStudent}/>
                     </div>
-                    
                 </div>
             </>:""}
             {stepper===1.1?<>
-                <div className='FindStudent'>
-                        <div className='FindStudentFooter'>
-                            <p>Student already exists? </p> <h6 onClick={()=> setStepper(1)}>Find student here.</h6>
-                        </div>
+                <div className='Form__Section'>
+                    <h6 className='Section__Title'>Find Student</h6>
+                    <AddStudent setStepper={setStepper}/>
+                </div>
+                {/* <div className='FindStudent'>
+                    <div className='FindStudentFooter'>
+                        <p>Student already exists? </p> <h6 onClick={()=> setStepper(1)}>Find student here.</h6>
                     </div>
-                <AddStudent />
+                </div> */}
+                {/* <AddStudent setStepper={setStepper} fetchStudent={fetchStudent}/> */}
+                {/* <AddStudent/> */}
             </>:""}
             {stepper===2?<>
                 <div className='Form__Section '>
@@ -293,14 +303,9 @@ function AddCase() {
                     <Button variant='contained' onClick={()=> {fetchSip(student.studentId);setStepper(3)}}>Submit</Button>
                 </div>
             </>:""}
-            {stepper===3?<>
-                <div>
-                    {JSON.stringify(sip)}
-                </div>
-            </>:""}
             
         </form>
     )
 }
 
-export default AddCase
+export default AddCase  

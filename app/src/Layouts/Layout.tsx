@@ -9,11 +9,21 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAuth } from './../Utils/AuthContext';
+import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
 interface LayoutProps {
     // define your props here
     active :string
 }
 const Layout: React.FC<LayoutProps> = (props) => {
+
+
+    const [openYearNTerm, setOpenYearNTerm] = React.useState(false);
+    const handleOpenYearNTerm = () => setOpenYearNTerm(true);
+    const handleCloseYearNTerm = () => setOpenYearNTerm(false);
+
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,8 +42,28 @@ const Layout: React.FC<LayoutProps> = (props) => {
                     <div className='SearchInputHolder'>
                         <SearchInput/>
                     </div>
-                    <div>
-                        test
+                    <div className='SchoolYear'>
+                        <p>SY: 2022-2023 </p>
+                        <IconButton aria-label="delete" size="small" onClick={()=>setOpenYearNTerm(true)}>
+                            <EditIcon fontSize="inherit" />
+                        </IconButton>
+                        <Modal
+                            open={openYearNTerm}
+                            onClose={handleCloseYearNTerm}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className='paper SchoolYearModal' >
+                                <h6 className='SchoolYearModal__Title'>School Year</h6>
+                                <div className='SchoolYearModal__Container'>
+                                   <h4>2022-2023</h4>
+                                   <p>Active</p> 
+                                </div>
+                                <div>
+                                    <Button  variant='contained' onClick={handleCloseYearNTerm}>End</Button>
+                                </div>
+                            </div>
+                        </Modal>
                     </div>
                     <div>
                         <div>

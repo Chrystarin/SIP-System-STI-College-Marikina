@@ -77,7 +77,7 @@ function CaseTableView(props:any) {
                                 key={row.sipId}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 className='CaseTableView__row'
-                                onClick={()=>navigate(`/students/${row.student.studentId}`)}
+                                onClick={()=>navigate(`/sip/${row.sipId}`)}
                             >
                                 <TableCell align="right"><p>{row.sipId}</p></TableCell>
                                 <TableCell component="th" scope="row" >

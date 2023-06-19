@@ -65,7 +65,6 @@ return (
                     id="outlined-basic" 
                     label="Middle Name" 
                     variant="outlined"
-                    required
                     fullWidth
                     onChange={(e)=>setStudentForm({...studentForm, middleName:e.target.value})}
                 />

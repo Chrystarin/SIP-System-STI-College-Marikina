@@ -5,7 +5,7 @@ import { UserDocument } from '../user/user.model';
 import SchoolYearModel, { SchoolYearPopulatedDocument } from './schoolYear.model';
 
 export const getSchoolYears: RequestHandler = async (req, res) => {
-    let { schoolYearStart, schoolYearEnd } = <SchoolYearQuery>(<unknown>req.query);
+    let { schoolYearStart, schoolYearEnd, active } = <SchoolYearQuery>(<unknown>req.query);
 
     let modelQuery: SchoolYearModelQuery = {};
 
@@ -19,6 +19,8 @@ export const getSchoolYears: RequestHandler = async (req, res) => {
         const [year, prop] = schoolYear;
         modelQuery[prop] = new Date(year).getFullYear();
     }
+
+    if(active !== undefined) modelQuery.end = { $exists: active };
 
     const schoolYears: Array<SchoolYearPopulatedDocument> | null = await SchoolYearModel.find(modelQuery).populate({ path: 'admin', select: 'employeeId role name' }).exec();
 

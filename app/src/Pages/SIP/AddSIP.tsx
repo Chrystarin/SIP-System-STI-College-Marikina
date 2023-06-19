@@ -38,7 +38,8 @@ function AddCase() {
     const [studentForm, setStudentForm] = useState({
         studentId: '',
         firstName: '',
-        lastName: '',
+        middleName: '',
+        lastName: ''
     });
     
     
@@ -128,6 +129,7 @@ function AddCase() {
                 studentId : studentForm.studentId,
                 name : {
                     first : studentForm.firstName,
+                    middle : studentForm.middleName,
                     last : studentForm.lastName
                 }
             })
@@ -196,6 +198,13 @@ function AddCase() {
                                 required
                                 fullWidth
                                 onChange={(e)=>setStudentForm({...studentForm, firstName:e.target.value})}
+                            />
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Middle Name" 
+                                variant="outlined"
+                                fullWidth
+                                onChange={(e)=>setStudentForm({...studentForm, middleName:e.target.value})}
                             />
                             <TextField 
                                 id="outlined-basic" 

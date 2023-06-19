@@ -2,6 +2,7 @@ BACKEND DEVELOPMENT SETUP INSTRUCTIONS
 * Open new terminal
 * Type "cd api"
 * Type "npm install"
+* Type "npm install -g ts-node"
 * Create an .env file at the root of the 'api' folder with the following contents:
     PORT = // Port number for api 
     CORS_ORIGIN = // Url for app

@@ -6,6 +6,7 @@ import CaseTableView from '../../Components/TableView/CaseTableView';
 import axios from './../../Utils/Axios';
 import { useParams } from 'react-router-dom';
 import {useAuth} from '../../Utils/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
 
@@ -14,6 +15,7 @@ function Profile() {
     const [sips, setSips] = useState<any>();
     const {id} = useParams();
     const {isAuth} = useAuth();
+    const navigate = useNavigate();
 
     const fetchUser = async () => {
         try{
@@ -91,7 +93,7 @@ function Profile() {
                 </ul>
 
                 {isAuth((!id) ? ((JSON.parse(localStorage.getItem('user') || ''))?.employeeId) : id) ? 
-                    <Button className='Updatebutton' variant='contained' fullWidth> Update Profile</Button>
+                    <Button className='Updatebutton' variant='contained' fullWidth onClick={()=>navigate("/update")}> Update Profile</Button>
                 :''}
             
             </div>

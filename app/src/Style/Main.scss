@@ -218,7 +218,6 @@ p{
                     color: white;
                 }
             }
-          
             .SchoolYearNTerm:hover{
                 opacity: 1;
             }
@@ -587,6 +586,7 @@ p{
     }
 }
 .ProfileDropdown{
+    min-width: 200px;
     .ProfileDropdown__Info{
         padding: 2em 1em;
         text-align: center;

@@ -56,8 +56,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
                             <div className='paper SchoolYearModal' >
                                 <h6 className='SchoolYearModal__Title'>School Year</h6>
                                 <div className='SchoolYearModal__Container'>
-                                   <h4>2022-2023</h4>
-                                   <p>Active</p> 
+                                    <h4>2022-2023</h4>
+                                    <p>Active</p> 
                                 </div>
                                 <div>
                                     <Button  variant='contained' onClick={handleCloseYearNTerm}>End</Button>

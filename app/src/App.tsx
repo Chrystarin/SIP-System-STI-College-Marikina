@@ -10,6 +10,7 @@ import LandingPage from './Pages/LandingPage/LandingPage';
 import TestStudent from './Components/AddStudent/AddStudent';
 import TestSchoolYear from './Test/SchoolYear';
 import TestSIP from './Test/SIP';
+import TestUpdate from './Test/UpdateProfile';
 
 import SIPView from './Pages/SIP/SIPView'
 import EmployeesList from './Pages/Employees/EmployeesList';
@@ -28,10 +29,12 @@ const App: React.FC = () => {
         <Route element={<ProtectedRoute allowedRoles={['admin', 'teacher', 'moderator']}/>}>
             <Route element={<Layout active={""}/>} >  
                 <Route path="/profile" element={<Profile />} />
-                
+
+                <Route path="/update" element={<TestUpdate/>} />
                 <Route path="/test/student" element={<TestStudent setStepper={()=>{}}/>} />
                 <Route path="/test/schoolyear" element={<TestSchoolYear/>} />
                 <Route path="/test/sip" element={<TestSIP/>} />
+                
             </Route>
 
             <Route element={<ProtectedRoute allowedRoles={['admin', 'moderator']}/>}>

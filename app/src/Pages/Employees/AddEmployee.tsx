@@ -69,7 +69,6 @@ function AddEmployee() {
                         id="outlined-basic" 
                         label="Middle Name" 
                         variant="outlined"
-                        required
                         onChange={(e)=>setRegisterForm({...registerForm, middleName:e.target.value})}
                     />
                     <TextField 
@@ -99,7 +98,7 @@ function AddEmployee() {
                         id="outlined-basic" 
                         label="ID No." 
                         variant="outlined" 
-                        type='number' 
+                        type='text' 
                         required
                         onChange={(e)=>setRegisterForm({...registerForm, employeeId:e.target.value})}
                     />

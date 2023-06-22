@@ -1,5 +1,9 @@
 import React,{useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import html2canvas from 'html2canvas'
+import {jsPDF} from 'jspdf';
+
 import TextField from '@mui/material/TextField';
 import CaseTableView from '../../Components/TableView/CaseTableView';
 import SearchInput from '../../Components/SearchInput/SearchInput';
@@ -16,6 +20,8 @@ import AddStudent from '../../Components/AddStudent/AddStudent';
 import axios from '../../Utils/Axios';
 
 function AddCase() {
+
+
     const { id } = useParams();
     const navigate = useNavigate();
     const [sip, setSip] = useState<any>();
@@ -59,6 +65,22 @@ function AddCase() {
         }
     };
 
+    const downloadPdfDocument = (rootElementId:any) => {
+        const input = document.getElementById(rootElementId);
+        if (!input) {
+            console.error(`Element with ID '${rootElementId}' not found.`);
+            return;
+          }
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'px', [canvas.width, canvas.height]);
+                pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
+                pdf.save("download.pdf");
+            })
+    }
+
+
     useEffect(() => {
         fetchSip();
     }, [])
@@ -69,10 +91,10 @@ function AddCase() {
         <form className='FormTemplate'>
             <h4 className='Form__Title'>SIP VIEW</h4>
                 <div className='Form__Section SIP'>
-                    <SIPForm sip={sip}/>
+                    <div id="divToDownload"><SIPForm sip={sip} /></div>
                 </div>
                 <div className='Button__Container'>
-                    <Button variant='contained' onClick={()=>{}}>Download</Button>
+                    <Button variant='contained' onClick={()=>{downloadPdfDocument("divToDownload")}}>Download</Button>
                     {sip.status==='pending' && (user.role === 'admin' || user.role === 'moderator')
                         ? 
                             <>

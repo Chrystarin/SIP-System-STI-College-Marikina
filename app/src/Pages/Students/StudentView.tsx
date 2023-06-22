@@ -85,7 +85,7 @@ function StudentView() {
                 </li>
                 <li>
                     <h6>Registered Since</h6>
-                    <p>{student.createdAt}</p>
+                    <p>{ new Date(student.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(student.createdAt).getDate() + ', ' + new Date(student.createdAt).getFullYear()} </p>
                 </li>
                 </ul>
                 {/* <Button className='Updatebutton' variant='contained' fullWidth> Update Profile</Button> */}

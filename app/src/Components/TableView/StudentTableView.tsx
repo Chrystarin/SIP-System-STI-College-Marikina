@@ -51,8 +51,8 @@ function StudentTableView(props:any) {
                                     </div>
                                 </TableCell>
                                 <TableCell align="right"><p>{student.studentId}</p></TableCell>
-                                <TableCell align="right"><p>{student.updatedAt}</p></TableCell>
-                                <TableCell align="right"><p>{student.createdAt}</p></TableCell>
+                                <TableCell align="right"><p>{ new Date(student.updatedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(student.updatedAt).getDate() + ', ' + new Date(student.updatedAt).getFullYear() }</p></TableCell>
+                                <TableCell align="right"><p>{ new Date(student.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(student.createdAt).getDate() + ', ' + new Date(student.createdAt).getFullYear() }</p></TableCell>
                             </TableRow>
                         ))} 
                     </TableBody>

@@ -53,8 +53,8 @@ function CaseTableView(props:any) {
                                     </div>
                                 </TableCell>
                                 <TableCell align="right"><p>{row.studentId}</p></TableCell>
-                                <TableCell align="right"><p>{row.updatedAt}</p></TableCell>
-                                <TableCell align="right"><p>{row.createdAt}</p></TableCell>
+                                <TableCell align="right"><p>{ new Date(row.updatedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(row.updatedAt).getDate() + ', ' + new Date(row.updatedAt).getFullYear() }</p></TableCell>
+                                <TableCell align="right"><p>{ new Date(row.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(row.createdAt).getDate() + ', ' + new Date(row.createdAt).getFullYear() }</p></TableCell>
                             </TableRow>
                         ))} 
                     </TableBody>
@@ -83,7 +83,7 @@ function CaseTableView(props:any) {
                                 <TableCell component="th" scope="row" >
                                     <p>{row.student.name.first} {row.student.name.last}</p>
                                 </TableCell>
-                                <TableCell align="right"><p>{row.createdAt}</p></TableCell>
+                                <TableCell align="right"><p>{ new Date(row.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(row.createdAt).getDate() + ', ' + new Date(row.createdAt).getFullYear() }</p></TableCell>
                                 <TableCell align="right"><p>{(row.status).toUpperCase()}</p></TableCell>
                                 <TableCell align="right">
                                     <p>

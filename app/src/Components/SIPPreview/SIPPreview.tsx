@@ -27,7 +27,7 @@ function SIPPreview(props:any) {
                                 </li>
                                 <li className='TitleValue'>
                                     <h6 className='TitleValue__Title BodyText1'>Registered Since:</h6>
-                                    <h6 className='TitleValue__Value BodyText1'>{student.createdAt}</h6>
+                                    <h6 className='TitleValue__Value BodyText1'>{ new Date(student.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(student.createdAt).getDate() + ', ' + new Date(student.createdAt).getFullYear() }</h6>
                                 </li>
                             </ul>
                         </div>
@@ -78,7 +78,7 @@ function SIPPreview(props:any) {
                                 </li>
                                 <li className='TitleValue'>
                                     <h6 className='TitleValue__Title BodyText1'>Registered Since:</h6>
-                                    <h6 className='TitleValue__Value BodyText1'>{data.student.createdAt}</h6>
+                                    <h6 className='TitleValue__Value BodyText1'>{ new Date(data.student.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(data.student.createdAt).getDate() + ', ' + new Date(data.student.createdAt).getFullYear()   }</h6>
                                 </li>
                             </ul>
                         </div>

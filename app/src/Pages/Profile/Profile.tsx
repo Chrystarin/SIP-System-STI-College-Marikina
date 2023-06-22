@@ -86,7 +86,7 @@ function Profile() {
                 { user.role === 'admin' ? '' :
                     <li>
                         <h6>Registered Since</h6>
-                        <p>{user.createdAt}</p>
+                        <p>{ new Date(user.createdAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(user.createdAt).getDate() + ', ' + new Date(user.createdAt).getFullYear() }</p>
                     </li>
                 }
                 </ul>

@@ -22,7 +22,7 @@ function StudentCases(props:any) {
                                         <Avatar className='TDName__Avatar'/>
                                         <p>{data.issuer.name.first} {data.issuer.name.last}</p>
                                     </td>
-                                    <td><p>{data.issuedAt}</p></td>
+                                    <td><p>{ new Date(data.issuedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(data.issuedAt).getDate() + ', ' + new Date(data.issuedAt).getFullYear() }</p></td>
                                     <td><p>{data.term}</p></td>
                                 </tr>
                             );
@@ -47,7 +47,7 @@ function StudentCases(props:any) {
                                         <Avatar className='TDName__Avatar'/>
                                         <p>{data.issuer.name.first} {data.issuer.name.last}</p>
                                     </td>
-                                    <td><p>{data.issuedAt}</p></td>
+                                    <td><p>{ new Date(data.issuedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(data.issuedAt).getDate() + ', ' + new Date(data.issuedAt).getFullYear() }</p></td>
                                     <td><p>{data.term}</p></td>
                                 </tr>
                             );
@@ -72,7 +72,7 @@ function StudentCases(props:any) {
                                         <Avatar className='TDName__Avatar'/>
                                         <p>{data.issuer.name.first} {data.issuer.name.last}</p>
                                     </td>
-                                    <td><p>{data.issuedAt}</p></td>
+                                    <td><p>{ new Date(data.issuedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(data.issuedAt).getDate() + ', ' + new Date(data.issuedAt).getFullYear() }</p></td>
                                     <td><p>{data.term}</p></td>
                                 </tr>
                             );
@@ -97,7 +97,7 @@ function StudentCases(props:any) {
                                         <Avatar className='TDName__Avatar'/>
                                         <p>{data.issuer.name.first} {data.issuer.name.last}</p>
                                     </td>
-                                    <td><p>{data.issuedAt}</p></td>
+                                    <td><p>{ new Date(data.issuedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(data.issuedAt).getDate() + ', ' + new Date(data.issuedAt).getFullYear() }</p></td>
                                     <td><p>{data.term}</p></td>
                                 </tr>
                             );
@@ -122,7 +122,7 @@ function StudentCases(props:any) {
                                         <Avatar className='TDName__Avatar'/>
                                         <p>{data.issuer.name.first} {data.issuer.name.last}</p>
                                     </td>
-                                    <td><p>{data.issuedAt}</p></td>
+                                    <td><p>{ new Date(data.issuedAt).toLocaleString('default', { month: 'long' }) + ' ' + new Date(data.issuedAt).getDate() + ', ' + new Date(data.issuedAt).getFullYear() }</p></td>
                                     <td><p>{data.term}</p></td>
                                 </tr>
                             );

@@ -396,6 +396,9 @@ p{
     align-items: center;
     gap: 45px;
     padding-bottom: 25px;
+    form{
+        width: 100%;
+    }
     .Form__Title{
         text-align: center;
         color: var(--primary);
@@ -471,6 +474,32 @@ p{
         //     grid-template-columns: 1fr 1fr 1fr .8fr;
         //     gap: 25px;
         // }
+        .profileInfo{
+            display: flex;
+            padding: 1em;
+            gap: 15px;
+            align-items: center;
+            h6{
+                color: var(--secondary);
+            }
+            ul{
+                list-style: none;
+                display: flex;
+                gap: 10px;
+                li{
+                    display: flex;
+                    gap: 5px;
+                    p:nth-child(1){
+                        opacity: .8;
+                        font-weight: 600;
+                    }
+                    p{
+                        color: var(--secondary);
+                    }
+                }
+            }
+        }
+        
     }
     .Button__Container{
         width: 100%;
@@ -539,6 +568,7 @@ p{
             }
         }
     }
+    
     .StudentCase{
         margin-top: 25px;
         table{
@@ -602,6 +632,19 @@ p{
         }
         li:hover{
             background-color: rgb(246, 246, 246);
+        }
+    }
+}
+.AccountCredentials{
+    div{
+        display: flex;
+        gap: 10px;
+        p{
+            color: var(--secondary);
+        }
+        p:nth-child(1){
+            opacity: .8;
+            font-weight: 600;
         }
     }
 }

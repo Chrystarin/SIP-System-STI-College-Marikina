@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
 
-import axios from './../Utils/Axios';
+import axios from '../../Utils/Axios';
 
 interface UpdateProfileProps {
     // define your props here

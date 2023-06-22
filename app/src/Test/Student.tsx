@@ -4,12 +4,14 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
 import axios from './../Utils/Axios';
+import { useNavigate } from 'react-router-dom';
 
 interface StudentProps {
     // define your props here
   }
   
   const Student: React.FC<StudentProps> = (props) => {
+    const navigate = useNavigate();
     const [studentId, setStudentId] = useState('');
     const [students, setStudents] = useState('');
     const [studentForm, setStudentForm] = useState({
@@ -19,8 +21,8 @@ interface StudentProps {
     });
     
 
-    const addStudent = async () => {
-        console.log(studentForm)
+    const addStudent = async (e:any) => {
+        e.preventDefault();
         try{
             await axios
             .post(`/students`,{
@@ -31,8 +33,8 @@ interface StudentProps {
                 }
             })
             .then((response: any) => {
-                console.log(response);
                 alert(response.data.message);
+                navigate("/students");
             });
         }
         catch (error: any){

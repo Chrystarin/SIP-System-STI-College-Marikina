@@ -50,8 +50,9 @@ const Layout: React.FC<LayoutProps> = (props) => {
                 }
             })
             .then((response: any) => {
-                console.log(response);
-                setSchoolYear(response.data)
+                console.log(response.data[0]);
+                if (response.data[0] === undefined) setSchoolYear(false)
+                else setSchoolYear(response.data[0])
             });
         }
         catch (error: any){
@@ -94,13 +95,8 @@ const Layout: React.FC<LayoutProps> = (props) => {
     };
 
     useEffect (() => {
-        if (schoolYear === "None") {
-            console.log("EMPTY")
-        }
-        else {
-            fetchActiveYear();
-        }
-    }, [schoolYear]);
+        fetchActiveYear();
+    }, []);
     
     return (
         <div className='Layout'>
@@ -111,7 +107,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
                         <SearchInput/>
                     </div>
                     <div className='SchoolYear'>
-                        <p>SY: 2022-2023 </p>
+                        <p>SY: {schoolYear ? (schoolYear.start + " - " + (schoolYear.start + 1) ) : 'No School Year Started'} </p>
                         <IconButton aria-label="delete" size="small" onClick={()=>setOpenYearNTerm(true)}>
                             <EditIcon fontSize="inherit" />
                         </IconButton>
@@ -124,18 +120,23 @@ const Layout: React.FC<LayoutProps> = (props) => {
                             <div className='paper SchoolYearModal' >
                                 <h6 className='SchoolYearModal__Title'>School Year</h6>
                                 <div className='SchoolYearModal__Container'>
-                                    <h4>2022-2023</h4>
-                                    <p>Active</p> 
+                                    <h4>{schoolYear ? (schoolYear.start + " - " + (schoolYear.start + 1) ) : 'No School Year Started'}</h4>
+                                    <p>{schoolYear ? 'Active' : 'Inactive'}</p> 
                                 </div>
-                                {schoolYear==="None" ? 
-                                    <div>
-                                        <Button  variant='contained' onClick={() => startSchoolYear()}>Start</Button>
-                                    </div>
-                                :
-                                    <div>
-                                        <Button  variant='contained' onClick={() => endSchoolYear()}>Start</Button>
-                                    </div>
-                                }
+                                { user.role === 'admin' 
+                                    ? <div>
+                                        {schoolYear ? 
+                                            <div>
+                                                <Button  variant='contained' onClick={() => endSchoolYear()}>End</Button>
+                                            </div>
+                                        :
+                                            <div>
+                                                <Button  variant='contained' onClick={() => startSchoolYear()}>Start</Button>
+                                            </div>
+                                        }
+                                    </div> 
+                                :''}
+                                
                             </div>
                         </Modal>
                     </div>

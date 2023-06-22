@@ -19,6 +19,7 @@ function AddCase() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [sip, setSip] = useState<any>();
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : '';
 
     const fetchSip = async () => {
         try{
@@ -72,7 +73,7 @@ function AddCase() {
                 </div>
                 <div className='Button__Container'>
                     <Button variant='contained' onClick={()=>{}}>Download</Button>
-                    {sip.status==='pending' 
+                    {sip.status==='pending' && (user.role === 'admin' || user.role === 'moderator')
                         ? 
                             <>
                                 <Button variant='contained' onClick={()=>{updateStatus('resolved')}}>Resolved</Button>

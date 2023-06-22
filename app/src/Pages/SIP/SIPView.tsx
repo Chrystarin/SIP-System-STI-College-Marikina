@@ -91,6 +91,7 @@ function AddCase() {
         <form className='FormTemplate'>
             <h4 className='Form__Title'>SIP VIEW</h4>
                 <div className='Form__Section SIP'>
+                    <h4 className='Form__Title'>Status: {(sip.status).toUpperCase()}</h4>
                     <div id="divToDownload"><SIPForm sip={sip} /></div>
                 </div>
                 <div className='Button__Container'>

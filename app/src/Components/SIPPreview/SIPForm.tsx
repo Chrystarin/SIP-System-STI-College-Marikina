@@ -139,22 +139,22 @@ function SIPForm(props: any) {
             <div className='SIPForm__Footer'>
                 <div>
                     <h6>Endorsed By</h6>
-                    <p></p>
-                    <span>Moderator</span>
+                    <p>&nbsp;</p>
+                    <span>Program Head</span>
                 </div>
                 <div>
                     <h6>Date</h6>
-                    <p></p>
+                    <p>&nbsp;</p>
 
                 </div>
                 <div>
                     <h6>Noted By</h6>
                     <p>Frederick Yulo</p>
-                    <span>Dean</span>
+                    <span>Dean/SHS Principal</span>
                 </div>
                 <div>
                     <h6>Date</h6>
-                    <p></p>
+                    <p>&nbsp;</p>
                 </div>
             </div>
         </div>

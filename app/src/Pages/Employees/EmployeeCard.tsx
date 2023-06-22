@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
@@ -38,7 +38,7 @@ function EmployeeCard(props:any) {
     const [openPassword, setOpenPassword] = React.useState(false);
     const handleOpenPassword = () => setOpenPassword(true);
     const handleClosePassword = () => setOpenPassword(false);
-    const [passwordVal, setPasswordVal] = React.useState();
+    const [passwordVal, setPasswordVal] = useState<any>();
     const resetPassword = async () => {
         try{
             await axios
@@ -135,7 +135,7 @@ function EmployeeCard(props:any) {
                 </div>
                 <div className='PasswordModal__Buttons'>
                     <Button variant='text' onClick={handleClosePassword}>Close</Button>
-                    <Button variant='contained'>Copy</Button>
+                    <Button variant='contained' onClick={() => {navigator.clipboard.writeText(passwordVal)}}>Copy</Button>
                 </div>
             </div>
         </Modal>

@@ -1,29 +1,51 @@
 .SearchInput{
-    background-color: red;
-    border-radius: 20px;
-    background-color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.058);
-    display: flex;
-    width: 250px;
-    padding:0 .8em 0 .5em;
-    align-items: center;
-    height: 35px;
-    overflow: hidden;
-    color: var(--secondary);
-    gap: 5px;
-    border: 1px solid rgba(128, 128, 128, 0.138);
-    label{
-        height: 70%;
-        svg{
-            height: 100%;
-            
+    position: relative;
+    width: 300px;
+    .SearchInput__Container{
+        display: flex;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow:  0 0 15px rgba(0, 0, 0, 0.03);
+        border: 1px solid rgb(233, 233, 233);
+        input{
+            width: 250px;
+            border: none;
+            outline: none;
         }
     }
-    
-    input{
-        height: 100%;
-        flex-grow: 1;
-        outline: none;
-        border: none;
+}
+.SearchSuggested{
+    position: absolute;
+    top: 120%;
+    z-index: 999999;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.137);
+    border-radius: 8px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0;
+    .ResultTitle{
+        padding: .5em 1em 0;
+        opacity: .6;
+        margin-bottom: 5px;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        li{
+            a{
+                display: block;
+                padding: .5em 1em;
+                transition: all .3s ease-in-out;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            a:hover{
+                background-color: rgb(234, 234, 234);
+            }
+        }
     }
 }

@@ -38,13 +38,6 @@ const getCaseKey = (caseType) => {
 };
 const getSIPs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { sipId, employeeId, studentId, status, schoolYearStart, schoolYearEnd } = req.query;
-    console.log(req.query);
-    console.log(sipId ? 'true' : 'false');
-    console.log(employeeId ? 'true' : 'false');
-    console.log(studentId ? 'true' : 'false');
-    console.log(status ? 'true' : 'false');
-    console.log(schoolYearStart ? 'true' : 'false');
-    console.log(schoolYearEnd ? 'true' : 'false');
     const modelQuery = {};
     if (sipId)
         modelQuery.sipId = sipId;

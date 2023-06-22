@@ -69,7 +69,6 @@ const SIP: React.FC<SIPProps> = (props) => {
             })
             .then((response: any) => {
                 console.log(response);
-                console.log(response.data[0].cases.LD.length>0 ? "true" : "False")
                 setSips(response.data)
             });
         }

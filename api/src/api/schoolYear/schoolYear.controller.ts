@@ -13,7 +13,6 @@ export const getSchoolYears: RequestHandler = async (req, res) => {
         modelQuery.start = { $gte: new Date(schoolYearStart).getFullYear() };
         modelQuery.end = { $lte: new Date(schoolYearEnd).getFullYear() };
     } else {
-        console.log(schoolYearStart, schoolYearEnd);
         const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
 
         if (schoolYear[0] !== undefined) {

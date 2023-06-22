@@ -13,14 +13,16 @@ export const getSchoolYears: RequestHandler = async (req, res) => {
         modelQuery.start = { $gte: new Date(schoolYearStart).getFullYear() };
         modelQuery.end = { $lte: new Date(schoolYearEnd).getFullYear() };
     } else {
+        console.log(schoolYearStart, schoolYearEnd);
         const schoolYear: [string | undefined, 'start' | 'end'] = schoolYearStart ? [schoolYearStart, 'start'] : [schoolYearEnd, 'end'];
-        if (schoolYear[0] === undefined) throw new UnprocessableEntity('School Year not started yet');
 
-        const [year, prop] = schoolYear;
-        modelQuery[prop] = new Date(year).getFullYear();
+        if (schoolYear[0] !== undefined) {
+            const [year, prop] = schoolYear;
+            modelQuery[prop] = new Date(year).getFullYear();
+        }
     }
 
-    if(active !== undefined) modelQuery.end = { $exists: !active };
+    if(active === 'true') modelQuery.end = { $exists: false }
 
     const schoolYears: Array<SchoolYearPopulatedDocument> | null = await SchoolYearModel.find(modelQuery).populate({ path: 'admin', select: 'employeeId role name' }).exec();
 

@@ -77,8 +77,8 @@ export const getSIPs: RequestHandler = async (req, res) => {
 
     const SIPs: Array<SIPPopulatedDocument> = await SipModel.find(modelQuery)
         .populate([
-            { path: 'schoolYear', populate: { path: 'admin' } }, 
-            { path: 'closed.by' }, 
+            { path: 'schoolYear', populate: { path: 'admin', select: '-credentials' } }, 
+            { path: 'closed.by', select: '-credentials' },
             { path: 'student' },
             { path: 'cases.AEC.issuer'},
             { path: 'cases.DCP.issuer'},
@@ -121,7 +121,7 @@ export const addCase: RequestHandler = async (req: Request<{}, {}, AddCase>, res
     }
 
     const matchedCase: Array<IssuerDocument> = activeSIP.cases[getCaseKey(sipCase)];
-    if (matchedCase.find((issuer: IssuerDocument) => issuer.issuer === user._id)) throw new UnprocessableEntity('Case already added');
+    if (matchedCase.find((issuer: IssuerDocument) => issuer.issuer.toString() === user._id.toString())) throw new UnprocessableEntity('Case already added');
 
     matchedCase.push({
         issuer: user._id,
